@@ -1,6 +1,5 @@
 {
     "name": "internal/upstream-configuration",
-    "description": "Pantheon upstream configuration for AZ Quickstart.",
     "type": "project",
     "version": "1.0.0",
     "repositories": [
@@ -10,6 +9,7 @@
         }
     ],
     "require": {
+        "php": ">=7.1",
         "az-digital/az_quickstart": "dev-drupal-9",
         "cweagans/composer-patches": "^1.0",
         "drupal/core-composer-scaffold": "^9",
