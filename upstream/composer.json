@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "az-digital/az_quickstart": "dev-drupal-9",
+        "az-digital/az_quickstart": "~2",
         "cweagans/composer-patches": "^1.0",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-recommended": "^9",
