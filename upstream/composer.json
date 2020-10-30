@@ -11,14 +11,14 @@
     "require": {
         "php": ">=7.1",
         "az-digital/az_quickstart": "~2",
-        "cweagans/composer-patches": "^1.0",
+        "cweagans/composer-patches": "^1.7",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-recommended": "^9",
         "drupal/pantheon_advanced_page_cache": "1.1",
         "drupal/redis": "1.4",
         "drush/drush": "^10",
         "pantheon-systems/drupal-integrations": "^8",
-        "zaporylie/composer-drupal-optimizations": "^1.1"
+        "zaporylie/composer-drupal-optimizations": "^1.2"
     },
     "extra": {
         "patches": {
