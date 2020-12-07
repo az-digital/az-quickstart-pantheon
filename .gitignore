@@ -5,17 +5,19 @@
 # To ignore all paths that composer manages when using this project template,
 # remove all double-hashed () lines.
 
+web/sites/default/default.services.pantheon.preproduction.yml
+web/sites/default/default.services.yml
+web/sites/default/default.settings.php
+web/sites/default/settings.pantheon.php
+web/sites/development.services.yml
+web/sites/example.settings.local.php
 
-# Ignore configuration files that may contain sensitive information.
-#
-# Typically, settings.php and related files are not committed to the
-# repository because they contain information such as the database
-# credentials that could be used to compromise a site. Sometimes,
-# a settings.php might be committed to the repository if it reads
-# sensitive information from environment variables or other sources.
-# ------------------------------------------------------------------
-/web/sites/*/settings*.php
-/web/sites/*/services*.yml
+# Pantheon commits a settings.php for environment-specific settings.
+# Place local settings in settings.local.php
+web/sites/*/settings.local.php
+web/sites/*/services*.yml
+!web/sites/*/services.pantheon.*.yml
+!web/sites/*/services.yml
 
 # Ignore paths that contain user-generated content.
 /web/sites/*/files
@@ -24,7 +26,12 @@
 # Ignore SimpleTest multi-site environment.
 /web/sites/simpletest
 
-# Ignore custom modules, profiles, and themes managed by Composer.
+
+# Ignore AZ Quickstart profile.
+/web/profiles/custom/az_quickstart
+
+
+# Ignore custom modules managed by Composer.
 #
 # When a development team creates one or more custom modules that
 # are intended for use on more than one site, the typical strategy
@@ -50,8 +57,6 @@
 # delete all of the `modules/custom` lines below.
 # ------------------------------------------------------------------
 /web/modules/custom/*
-/web/profiles/custom/*
-/web/themes/custom/*
 #!/web/modules/custom/module_in_repo
 
 
@@ -113,12 +118,13 @@ upstream/web/
 /web/sites/default/default.services.yml
 /web/sites/default/default.services.pantheon.preproduction.yml
 /web/sites/default/default.settings.php
+/web/sites/default/config/.htaccess
+/web/sites/default/config/README
 /web/sites/development.services.yml
 /web/sites/example.settings.local.php
 /web/sites/example.sites.php
 /web/themes/README.txt
 /.drush-lock-update
-/.gitattributes
 
 # Other common rules
 # ------------------
