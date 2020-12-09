@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=7.1",
-        "az-digital/az_quickstart": "~2",
+        "az-digital/az_quickstart": "2.0.0-alpha1",
         "cweagans/composer-patches": "^1.7",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-recommended": "^9",
@@ -22,9 +22,6 @@
     },
     "extra": {
         "patches": {
-            "drupal/core": {
-                "db version": "https://raw.githubusercontent.com/stevector/drupal-9-project/master/patches/issue-2--mariadb-version.patch"
-            },
             "pantheon-systems/drupal-integrations": {
                 "tmp dir fix": "https://github.com/pantheon-systems/drupal-integrations/commit/fceec6b5ab469aedc0c3e59d9e1f813f9059cef6.patch"
             }
