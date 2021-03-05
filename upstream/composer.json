@@ -18,6 +18,7 @@
         "drupal/pantheon_advanced_page_cache": "1.2",
         "drupal/redis": "1.5",
         "drush/drush": "^10",
+        "oomphinc/composer-installers-extender": "2.0.0",
         "pantheon-systems/drupal-integrations": "^9",
         "zaporylie/composer-drupal-optimizations": "^1.2"
     }
