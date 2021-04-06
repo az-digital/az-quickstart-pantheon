@@ -1,0 +1,20 @@
+name: Test upstream composer config
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: 0 0 * * *
+jobs:
+  composer:
+    runs-on: ubunutu-latest
+    name: Test composer install
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+            php-version: 7.4
+            tools: composer:v2
+      - name: Simulate Pantheon's composer install command
+        run: composer --no-cache --no-interaction --no-progress --prefer-dist --ansi install
