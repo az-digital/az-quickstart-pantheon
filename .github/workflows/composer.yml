@@ -11,7 +11,7 @@ on:
     - cron: 0 0 * * *
 jobs:
   composer:
-    runs-on: ubunutu-latest
+    runs-on: ubuntu-latest
     name: Test composer install
     steps:
       - uses: actions/checkout@v2
