@@ -61,7 +61,8 @@
         },
         "drupal-scaffold": {
             "allowed-packages": [
-                "pantheon-systems/drupal-integrations"
+                "pantheon-systems/drupal-integrations",
+                "az-digital/az_quickstart"
             ],
             "locations": {
                 "web-root": "./web"
