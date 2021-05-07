@@ -18,5 +18,14 @@ jobs:
         with:
             php-version: 7.4
             tools: composer:v2
+      - name: Find the pull request source branch name
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "AZ_TRIMMED_REF=${GITHUB_HEAD_REF}" >> ${GITHUB_ENV}
+      - name: Check if matching Quickstart dev branch name exists
+        if: ${{ github.event_name == 'pull_request' }}
+        run: if [ $(git ls-remote --heads https://github.com/az-digital/az_quickstart.git $AZ_TRIMMED_REF | wc -l) = 1 ]; then echo "QUICKSTART_BRANCH=${AZ_TRIMMED_REF}" >> ${GITHUB_ENV}; fi
+      - name: Use Quickstart dev branch if it exists
+        if: ${{ github.event_name == 'pull_request' }}
+        run: '[ -n "$QUICKSTART_BRANCH" ] && composer require --working-dir=upstream --no-update az-digital/az_quickstart:dev-${QUICKSTART_BRANCH}'
       - name: Simulate Pantheon's composer install command
         run: composer --no-cache --no-interaction --no-progress --prefer-dist --ansi install
