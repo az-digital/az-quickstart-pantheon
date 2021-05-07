@@ -128,13 +128,17 @@ upstream/web/
 
 # Ignore favicons scaffolded by AZ Quickstart
 /web/android-chrome-192x192.png
-/web/android-chrome-384x384.png
+/web/android-chrome-512x512.png
 /web/apple-touch-icon.png
 /web/browserconfig.xml
+/web/favicon-16x16.png
 /web/favicon-32x32.png
-/web/favicon-48x48.png
 /web/favicon.ico
+/web/mstile-70x70.png
+/web/mstile-144x144.png
 /web/mstile-150x150.png
+/web/mstile-310x150.png
+/web/mstile-310x310.png
 /web/safari-pinned-tab.svg
 /web/site.webmanifest
 
