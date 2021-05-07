@@ -26,6 +26,7 @@ jobs:
         run: if [ $(git ls-remote --heads https://github.com/az-digital/az_quickstart.git $AZ_TRIMMED_REF | wc -l) = 1 ]; then echo "QUICKSTART_BRANCH=${AZ_TRIMMED_REF}" >> ${GITHUB_ENV}; fi
       - name: Use Quickstart dev branch if it exists
         if: ${{ github.event_name == 'pull_request' }}
+        continue-on-error: true
         run: '[ -n "$QUICKSTART_BRANCH" ] && composer require --working-dir=upstream --no-update az-digital/az_quickstart:dev-${QUICKSTART_BRANCH}'
       - name: Simulate Pantheon's composer install command
         run: composer --no-cache --no-interaction --no-progress --prefer-dist --ansi install
