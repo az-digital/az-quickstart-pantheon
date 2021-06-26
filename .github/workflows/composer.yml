@@ -29,3 +29,21 @@ jobs:
         run: composer require --working-dir=upstream --no-update az-digital/az_quickstart:dev-${QUICKSTART_BRANCH}
       - name: Simulate Pantheon's composer install command
         run: composer --no-cache --no-interaction --no-progress --prefer-dist --ansi install
+      - name: Simulate Pantheon adding composer.lock to git
+        run: |
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git config --global user.name "${GITHUB_ACTOR}"
+          COMPOSER_LOCK_CHANGED=$(git status --porcelain composer.lock)
+          if [[ ! -z "$COMPOSER_LOCK_CHANGED" ]]; then
+            git add composer.lock
+            git commit -m "Simulate Pantheon adding composer.lock to git"
+          fi
+      # Checks for any changes made not covered by .gitignore.
+      - name: Ensure changes are covered by .gitignore
+        run: |
+          MODIFIED_OR_ADDED_LIST=$(git status --porcelain)
+          if [[ ! -z "$MODIFIED_OR_ADDED_LIST" ]]; then
+            2>&1 echo "The build step affected files that are not ignored by git:"
+            2>&1 echo $MODIFIED_OR_ADDED_LIST
+            exit 1
+          fi
