@@ -13,8 +13,8 @@ Because Quickstart is a relatively large install profile, we recommend performin
 Below is an example drush command that can be executed with terminus to install Quickstart on a Pantheon site.  Note that these commands put the site in SFTP mode before performing the installation.
 
 ```
-terminus -y -n connection:set site-name.dev sftp
-terminus -y -n drush site-name.dev -- \
+terminus -y -n connection:set my-site.dev sftp
+terminus -y -n drush my-site.dev -- \
   site:install az_quickstart \
   --account-name="azadmin" \
   --account-mail="noreply@email.arizona.edu" \
@@ -23,4 +23,4 @@ terminus -y -n drush site-name.dev -- \
   --yes \
   --verbose
 ```
-_(Replace `site-name` with actual Pantheon site name and modify account name, emails, and site name as desired)_
+_(Replace `my-site` with actual Pantheon site name and modify account name, emails, and site name as desired)_
