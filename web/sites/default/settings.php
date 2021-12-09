@@ -17,6 +17,14 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
 include __DIR__ . "/settings.pantheon.php";
 
 /**
+ * If there is an upstream settings file, then include it
+ */
+$upstream_settings = __DIR__ . "/settings.upstream.php";
+if (file_exists($upstream_settings)) {
+  include $upstream_settings;
+}
+
+/**
  * Skipping permissions hardening will make scaffolding
  * work better, but will also raise a warning when you
  * install Drupal.
