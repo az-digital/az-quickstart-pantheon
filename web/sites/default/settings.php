@@ -17,12 +17,12 @@ $settings['container_yamls'][] = __DIR__ . '/services.yml';
 include __DIR__ . "/settings.pantheon.php";
 
 /**
- * If there is an upstream settings file, then include it
+ * Include the upstream-specific settings file.
+ *
+ * Loads settings from the upstream-provided settings file. Removing this line
+ * is discouraged.
  */
-$upstream_settings = __DIR__ . "/settings.upstream.php";
-if (file_exists($upstream_settings)) {
-  include $upstream_settings;
-}
+include __DIR__ . "/settings.upstream.php";
 
 /**
  * Skipping permissions hardening will make scaffolding
