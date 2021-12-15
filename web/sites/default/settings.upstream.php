@@ -13,7 +13,6 @@
  * attempting to apply upstream updates.
  */
 
-
 /**
  * Allow loading config for the 'migrate' database from
  * sites/default/files/private/migration_config.json
