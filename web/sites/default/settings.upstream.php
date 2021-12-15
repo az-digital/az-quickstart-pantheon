@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * @file
+ * Upstream configuration file for AZ QuickStart sites.
+ *
+ * IMPORTANT:
+ * Do not modify this file.  This file is maintained by the AZ QuickStart
+ * upstream maintainers.
+ *
+ * Site-specific modifications belong in settings.php, not this file. This file
+ * may change in future releases and modifications would cause conflicts when
+ * attempting to apply upstream updates.
+ */
+
 const MIGRATION_DB_CONFIG_FILE_PATH = 'sites/default/files/private/migration_config.json';
 if (file_exists(MIGRATION_DB_CONFIG_FILE_PATH)) {
   $migration_config = json_decode(file_get_contents(MIGRATION_DB_CONFIG_FILE_PATH), TRUE);
