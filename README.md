@@ -26,4 +26,4 @@ terminus -y -n drush my-site.dev -- \
 _(Replace `my-site` with actual Pantheon site name and modify account name, emails, and site name as desired)_
 
 ## Upstream Settings (settings.upstream.php)
-This file (settings.upstream.php) is included to add upstream-wide configuration to all sites using the upstream. It is strongly suggested that you not delete or modify this file as it may cause reliability issues with your site. If site-specific configuration is needed, please use settings.php.
+This file (`settings.upstream.php`) is included to add upstream-wide configuration to all sites using the upstream. It is strongly suggested that you not delete or modify this file as it may cause reliability issues with your site. If site-specific configuration is needed, please use `settings.php`.
