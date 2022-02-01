@@ -33,6 +33,11 @@ jobs:
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
+          UPSTREAM_CHANGED=$(git status --porcelain upstream/composer.json)
+          if [[ ! -z "$UPSTREAM_CHANGED" ]]; then
+            git add upstream/composer.json
+            git commit -m "Simulate adding Quickstart dev branch changes to git"
+          fi
           COMPOSER_LOCK_CHANGED=$(git status --porcelain composer.lock)
           if [[ ! -z "$COMPOSER_LOCK_CHANGED" ]]; then
             git add composer.lock
