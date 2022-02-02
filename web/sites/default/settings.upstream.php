@@ -61,9 +61,8 @@ if (defined('PANTHEON_ENVIRONMENT')) {
    *
    * @see https://pantheon.io/docs/drupal-cache/
    */
-
   // Performance settings for test and live environments.
-  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], array('test', 'live'))) {
+  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['test', 'live'])) {
     // Browser and proxy cache maximum age - 6 hours.
     $config['system.performance']['cache']['page']['max_age'] = 21600;
 
