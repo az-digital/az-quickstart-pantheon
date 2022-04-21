@@ -85,4 +85,45 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['system.performance']['js']['preprocess'] = 0;
   }
 
+  /*
+   * Environment Indicator module settings.
+   * see: https://pantheon.io/docs/environment-indicator
+   */
+  // Pantheon Env Specific Config
+  if (isset($_ENV['PANTHEON_ENVIRONMENT'])) {
+    switch ($_ENV['PANTHEON_ENVIRONMENT']) {
+      case 'lando':
+        // Localdev or Lando environments.
+        $config['environment_indicator.indicator']['name'] = 'Local Dev';
+        $config['environment_indicator.indicator']['bg_color'] = '#990055';
+        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+        break;
+      case 'dev':
+        $config['environment_indicator.indicator']['name'] = 'Dev';
+        $config['environment_indicator.indicator']['bg_color'] = '#4a634e';
+        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+        break;
+      case 'test':
+        $config['environment_indicator.indicator']['name'] = 'Test';
+        $config['environment_indicator.indicator']['bg_color'] = '#a95c42';
+        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
+        break;
+      case 'live':
+        $config['environment_indicator.indicator']['name'] = 'LIVE';
+        $config['environment_indicator.indicator']['bg_color'] = '#0f0f0f';
+        $config['environment_indicator.indicator']['fg_color'] = '#dddddd';
+        break;
+      default:
+        // Multidev catchall.
+        $config['environment_indicator.indicator']['name'] = 'Multidev';
+        $config['environment_indicator.indicator']['bg_color'] = '#e7131a';
+        $config['environment_indicator.indicator']['fg_color'] = '#000000';
+        break;
+    }
+  }
+}
+else {
+  $config['environment_indicator.indicator']['name'] = 'Local';
+  $config['environment_indicator.indicator']['bg_color'] = '#707070';
+  $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
 }
