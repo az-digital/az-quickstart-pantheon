@@ -85,7 +85,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['system.performance']['js']['preprocess'] = 0;
   }
 
-  /*
+  /**
    * Environment Indicator module settings.
    * see: https://pantheon.io/docs/environment-indicator
    */
