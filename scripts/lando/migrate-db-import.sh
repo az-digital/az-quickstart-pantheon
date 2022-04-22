@@ -28,6 +28,7 @@ while (( "$#" )); do
       shift
       break
       ;;
+
     -*|--*=)
       shift
       ;;
@@ -41,6 +42,7 @@ while (( "$#" )); do
       ;;
   esac
 done
+
 # Set positional arguments in their proper place
 eval set -- "$FILE"
 PV=""
