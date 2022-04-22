@@ -1,0 +1,43 @@
+tooling:
+  # After running 'install' you can use this command prepare your lando site for migration.
+  migrate-config:
+    service: appserver
+    cmd:
+      - /bin/bash /app/scripts/lando/migrate-setup-from-pantheon.sh
+    options:
+      - site:
+          description: The database service to use
+          default: none
+          alias:
+            - s
+          interactive:
+            type: input
+            message: Add the source site name and environment you wish to pull files from <sitename.env>
+            default: none
+            weight: 600
+
+  # After running 'install' you can use this command prepare your lando site for migration.
+  migrate-db-setup:
+    service: appserver
+    cmd:
+      - /usr/bin/mysql -h database -uroot -e "CREATE DATABASE IF NOT EXISTS migrate; GRANT ALL PRIVILEGES ON migrate.* TO 'pantheon'@'%' IDENTIFIED by 'pantheon';"
+      - chmod 777 /app/web/sites/default/settings.php
+      - echo "\$databases['migrate']['default'] = [\n  'driver' => 'mysql',\n  'namespace' => 'Drupal\Core\Database\Driver\mysql',\n  'database' => 'migrate',\n  'username' => 'pantheon',\n  'password' => 'pantheon',\n  'port' => '3306',\n  'host' => 'database',\n  'prefix' => '',\n];" >> /app/web/sites/default/settings.php
+      - chmod 644 /app/web/sites/default/settings.php
+
+  # After running 'migrate-setup' you can use this command to import your
+  # database into the newly created migrate database.
+  "migrate-db-import <file>":
+    service: :host
+    description: YOU MUST RUN LANDO PULL FIRST Imports a migration site dump file into a database service
+    cmd: /bin/bash /app/scripts/lando/migrate-db-import.sh
+    user: root
+    options:
+      host:
+        description: The database service to use
+        default: database
+        alias:
+          - h
+      no-wipe:
+        description: Do not destroy the existing database before an import
+        boolean: true
