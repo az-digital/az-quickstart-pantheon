@@ -1,0 +1,24 @@
+services:
+  appserver:
+    overrides:
+      # Pass SSH keys.
+      volumes:
+        - type: bind
+          # Linux user: add 'export LANDO_SSH_AUTH_SOCK="${SSH_AUTH_SOCK}"' at the end of your ~/.bashrc:
+          # Mac user: MacOS specific path is here as the variable default value, nothing to do.
+          source: "${LANDO_SSH_AUTH_SOCK:-/run/host-services/ssh-auth.sock}"
+          target: /run/host-services/ssh-auth.sock
+      environment:
+        SSH_AUTH_SOCK: /run/host-services/ssh-auth.sock
+    run_as_root:
+      - chown www-data:www-data /run/host-services/ssh-auth.sock
+      - chmod g+w /run/host-services/ssh-auth.sock
+events:
+  post-start:
+    - appserver: test -e ~/.ssh/config || printf 'Host *\n  AddKeysToAgent yes\n' > ~/.ssh/config
+tooling:
+  ssh-fix:
+    service: appserver
+    description: Fix ssh auth sock permission for MacOS users. Lando rebuild fixes the problem as well.
+    cmd: "/bin/chgrp www-data /run/host-services/ssh-auth.sock && /bin/chmod g+w /run/host-services/ssh-auth.sock"
+    user: root
