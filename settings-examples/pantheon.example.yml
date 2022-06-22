@@ -1,0 +1,26 @@
+# Copy this file to "pantheon.yml" in the root directory of your site repository
+# to override values configured in pantheon.upstream.yml.
+#
+# For more information see: https://pantheon.io/docs/pantheon-yml
+api_version: 1
+
+# Enforce HTTPS and HSTS.
+# Change this value to "full" when site domains are properly configured.
+# @see https://pantheon.io/docs/pantheon-yml#enforce-https--hsts
+enforce_https: transitional
+
+# Quicksilver workflows useful for all Arizona Quickstart sites.
+# @see https://pantheon.io/docs/quicksilver/
+workflows:
+  deploy:
+    after:
+      # Run Config Distro Update when deploying to test or live.
+      - type: webphp
+        description: Run Config Distro Update with Drush
+        script: private/scripts/drush_config_distro_update.php
+  sync_code:
+    after:
+      # Run Config Distro update when pushing/syncing code into dev/multidev.
+      - type: webphp
+        description: Run Config Distro Update with Drush
+        script: private/scripts/drush_config_distro_update.php
