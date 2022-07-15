@@ -6,7 +6,7 @@ tooling:
       - /bin/bash /app/scripts/lando/migrate-setup-from-pantheon.sh
     options:
       - site:
-          description: The Pantheon site name
+          description: The Pantheon source site name
           default: none
           alias:
             - s
