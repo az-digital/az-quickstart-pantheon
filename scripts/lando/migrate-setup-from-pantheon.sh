@@ -36,6 +36,6 @@ terminus backup:get $site --element=db | xargs wget -O database.sql.gz
 echo "Creating a new database called migrate in the database service..."
 /usr/bin/mysql -h database -uroot -e "CREATE DATABASE IF NOT EXISTS migrate; GRANT ALL PRIVILEGES ON migrate.* TO 'pantheon'@'%' IDENTIFIED by 'pantheon';"
 chmod 777 /app/web/sites/default/settings.php
-echo "\$databases['migrate']['default'] = [\n  'driver' => 'mysql',\n  'namespace' => 'Drupal\Core\Database\Driver\mysql',\n  'database' => 'migrate',\n  'username' => 'pantheon',\n  'password' => 'pantheon',\n  'port' => '3306',\n  'host' => 'database',\n  'prefix' => '',\n];" >> /app/web/sites/default/settings.php
+printf "\$databases['migrate']['default'] = [\n  'driver' => 'mysql',\n  'namespace' => 'Drupal\Core\Database\Driver\mysql',\n  'database' => 'migrate',\n  'username' => 'pantheon',\n  'password' => 'pantheon',\n  'port' => '3306',\n  'host' => 'database',\n  'prefix' => '',\n];" >> /app/web/sites/default/settings.php
 chmod 644 /app/web/sites/default/settings.php
 echo "You are free to use lando migrate-db-import database.sql.gz"
