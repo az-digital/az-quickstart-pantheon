@@ -1,4 +1,5 @@
 # Arizona Quickstart Composer-enabled Pantheon Upstream
+
 This upstream is adapted from Pantheon's standard Drupal 9 upstream and works with the Platform's Integrated Composer build process.
 
 Unlike with earlier Pantheon upstreams (e.g. the UA Quickstart Drupal 7 upstream), files such as Drupal Core that you are unlikely to adjust while building sites are not in the main branch of the repository. Instead, they are referenced as dependencies that are installed by Composer.
@@ -8,9 +9,10 @@ For more information and detailed installation guides, please visit the Integrat
 This upstream is maintained by [Campus Web Services](https://web.arizona.edu) in collaboration with the [Arizona Digital](https://digitial.arizona.edu) team and it tracks the latest stable release of Arizona Quickstart.
 
 ## Note about installing Drupal
+
 Because Quickstart is a relatively large install profile, we recommend performing the site install (Drupal installation) via drush (and terminus) to avoid installation problems that can be encountered when performing an interactive/web install (via `install.php`) due to [Pantheon's strict web request timeout configuration](https://pantheon.io/docs/timeouts).
 
-Below is an example drush command that can be executed with terminus to install Quickstart on a Pantheon site.  Note that these commands put the site in SFTP mode before performing the installation.
+Below is an example drush command that can be executed with terminus to install Quickstart on a Pantheon site. Note that these commands put the site in SFTP mode before performing the installation.
 
 ```
 terminus -y -n connection:set my-site.dev sftp
@@ -23,14 +25,32 @@ terminus -y -n drush my-site.dev -- \
   --yes \
   --verbose
 ```
+
 _(Replace `my-site` with actual Pantheon site name and modify account name, emails, and site name as desired)_
 
 ## Upstream Settings (settings.upstream.php)
+
 This file (`settings.upstream.php`) is included to add upstream-wide configuration to all sites using the upstream. It is strongly suggested that you not delete or modify this file as it may cause reliability issues with your site. If site-specific configuration is needed, please use `settings.php`.
+
+When tasked with migrating a UA Site or Quickstart 1 site to an Arizona Site or Quickstart 2 custom site these are the steps:
+
+Find the source site machine name in the ticket assigned to you.
+Find the destination site machine name in the ticket assigned to you.
+
+Double check that the source site and destination sites exist in pantheon and have a live site environment associated with them.
+
+```
+terminus env:view <sourcesitename.live>
+terminus env:view <destinationsitename.live>
+```
+
+Once you've determined that a site is truly eligible to be migrated, follow these steps.
+
+Here is my process for running migrations that fail remotely via terminus, or during GH actions.
 
 ## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from pantheon locally.
 
-NOTE: The  `lando migrate-setup-from-pantheon` command requires that a site exists on pantheon, since it uses terminus to find site variables on the source site.
+NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on pantheon, since it uses terminus to find site variables on the source site.
 
 From the parent directory where you want to create your local copy of a site on
 pantheon.
@@ -43,11 +63,50 @@ lando init --source pantheon
 This starts the interactive site creation tool when you should be able to choose
 your destination site.
 
+Let’s check our remote settings.
+
+```
+git remote -v
+```
+
+The above command should have an output like this
+
+```
+origin	ssh://codeserver.dev.ca424136-e0.drush.in:2222/~/repository.git (fetch)
+origin	ssh://codeserver.dev.ca424136-e0.drush.in:2222/~/repository.git (push)
+upstream	https://github.com/az-digital/az-quickstart-pantheon.git (fetch)
+upstream	https://github.com/az-digital/az-quickstart-pantheon.git (push)
+```
+
+If you don’t have an upstream remote listed, you can add it.
+
+```
+git remote add upstream https://github.com/az-digital/az-quickstart-pantheon.git
+```
+
+Then when you do `git remote -v` you should see the desired output.
+
+In order for your local git to see all the files and branches on the upstream we
+need to fetch the upstream.
+
+```
+git fetch upstream issue/83
+```
+
+Now, we need to checkout the scripts and Lando config we need from the upstream
+branch.
+
+```
+git checkout upstream/issue/83 .lando.upstream.yml scripts/lando/migrate-db-import.sh scripts/lando/migrate-setup-from-pantheon.sh
+```
+
 The next step is to start lando…. Then you can go to one of the listed URLs upon
 success
+
 ```
 lando start
 ```
+
 Now if you run `lando` You should have more than just the defaults from the
 pantheon config. Particularly, these two:
 
@@ -69,14 +128,14 @@ Then install composer dependencies
 lando composer update
 ```
 
-Now we can use the lando tooling to set up our site to migrate locally instead
+Now we can use the Lando tooling to set up our site to migrate locally instead
 of over http, which is much faster.
 
 NOTE: This step overrides the migrate database config that exists in
 https://github.com/az-digital/az-quickstart-pantheon/blob/master/web/sites/default/settings.upstream.php#L20-L35
 
 ```
-lando migrate-setup-from-pantheon -s <sitename.env>
+lando migrate-setup-from-pantheon -s <sourcesitename.env>
 ```
 
 Then import the resulting database into the new migrate database
@@ -97,7 +156,14 @@ lando drush mim --group=az_migration
 ```
 
 Once the migrations are completed, you can push the files and database, but not
-the code back to dev
+the code back to dev, but first check the **migration status**.
+
+Check the migration status and post the results in the ticket assigned to you.
+
+```
+lando drush ms --group=az_migration > AZSITEMIGRATION.md
+cat AZSITEMIGRATION.md
+```
 
 Note: we are not pushing code up at this time, because we don't want to add our settings.php changes or lando.upstream.yml or scripts back to pantheon.
 
@@ -108,32 +174,34 @@ lando push -c none -d dev -f dev
 Open the dev site when the push is complete, and do a spot check
 
 ```
-terminus env:view <sitename.env>
+terminus env:view <destinationsitename.env>
 ```
 
 **Always make a backup if overwriting live**
 
 ```
-terminus backup:create <sitename.live>
+terminus backup:create <destinationsitename.live>
 ```
 
 If all looks good, go ahead and deploy your migration to another environment,
 overwriting that environment’s database and files.
 
 ```
-terminus env:clone-content <sitename.dev> <target_env> --cc -y
+terminus env:clone-content <destinationsitename.dev> <target_env> --cc -y
 ```
 
-Check the site
+Check the destination site.
 
 ```
-terminus env:view <sitename.live>
+terminus env:view <destinationsitename.live>
 ```
 
 ### Clean up
+
 Once your migration is complete, you can delete the source migrate database config from your sites web/sites/default/settings.php file.
 
 This can be done with `git checkout` as seen below.
+
 ```
 git checkout master web/sites/default/settings.php
 ```
