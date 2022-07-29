@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "php": ">=7.3",
+        "php": ">=7.4",
         "az-digital/az_quickstart": "2.4.1",
         "composer/installers": "^1.9",
         "cweagans/composer-patches": "^1.7",
