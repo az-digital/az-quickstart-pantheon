@@ -2,8 +2,6 @@ name: Create PR for new Arizona Quickstart Release
 on:
   repository_dispatch:
     types: az_quickstart_release
-env:
-  GITHUB_TOKEN: ${{ secrets.REPO_DISPATCH_TOKEN }}
 
 jobs:
   release:
@@ -24,5 +22,5 @@ jobs:
           git add upstream/composer.json
           git commit -m 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}'
           git push --set-upstream origin 'az-quickstart-${{ github.event.client_payload.version }}'
-          echo "${{ GITHUB_TOKEN }}" | gh auth login --with-token
+          echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
           gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body ''
