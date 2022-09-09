@@ -23,4 +23,4 @@ jobs:
           git commit -m 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}'
           git push --set-upstream origin 'az-quickstart-${{ github.event.client_payload.version }}'
           echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
-          gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body ''
+          gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body 'Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}'
