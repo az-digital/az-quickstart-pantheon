@@ -50,18 +50,18 @@ Once you've determined that a site is truly eligible to be migrated, follow thes
 
 NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site.
 
-From the parent directory where you want to create your local copy of a site on
-Pantheon.
+From the parent directory where you want to create your local copy of the **destination**
+site on Pantheon.
 
 ```
-mkdir <sitename> && cd "$_"
+mkdir <destinationsitename> && cd "$_"
 lando init --source pantheon
 ```
 
-This starts the interactive site creation tool when you should be able to choose
-your destination site.
+This starts the interactive site creation tool that allows you to choose
+your destination site from a list of sites created on pantheon.
 
-The next step is to start lando…. Then you can go to one of the listed URLs upon
+The next step is to start lando. After which you can go to one of the listed URLs upon
 success
 
 ```
@@ -76,8 +76,9 @@ pantheon config. Particularly, these two:
   // lando migrate-setup-from-pantheon  Runs migrate-setup-from-pantheon commands
 ```
 
-Then you will want to use lando to pull the site locally (Typically you'll want
-to get the live db and files, and dev codebase.)
+The next step is to use Lando to pull the destination site locally from the site that you created on Pantheon.
+(Typically you'll want to get the live db and files, and dev codebase.) If they do not yet exist on Pantheon, 
+Feel free to enable those environments for your destination site now. 
 
 ```
 lando pull -d live -f live -c none
@@ -99,7 +100,9 @@ https://github.com/az-digital/az-quickstart-pantheon/blob/master/web/sites/defau
 lando migrate-setup-from-pantheon -s <sourcesitename.env>
 ```
 
-Then import the resulting database into the new migrate database
+**NOTE:** The `migrate-setup-from-pantheon` command executes a [script](https://github.com/az-digital/az-quickstart-pantheon/blob/master/scripts/lando/migrate-setup-from-pantheon.sh) included with this repository.
+
+Then import the resulting database dump file into the newly created (by the script) `migrate` database
 
 ```
 lando migrate-db-import database.sql.gz
