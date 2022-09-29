@@ -59,7 +59,7 @@ lando init --source pantheon
 ```
 
 This starts the interactive site creation tool that allows you to choose
-your destination site from a list of sites created on pantheon.
+your destination site from a list of sites created on Pantheon.
 
 The next step is to start lando. After which you can go to one of the listed URLs upon
 success
