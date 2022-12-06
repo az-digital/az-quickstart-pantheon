@@ -15,7 +15,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/core-composer-scaffold": "^9",
         "drupal/core-recommended": "^9",
-        "drupal/pantheon_advanced_page_cache": "2.0.0",
+        "drupal/pantheon_advanced_page_cache": "2.1.1",
         "drupal/redis": "1.5",
         "drush/drush": "^11",
         "oomphinc/composer-installers-extender": "2.0.0",
