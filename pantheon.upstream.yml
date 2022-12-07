@@ -4,10 +4,9 @@ web_docroot: true
 # values. Overridding this setting with either "full" or "full+subdomains" in
 # the site-specific pantheon.yml file is recommended prior to site go-live.
 enforce_https: transitional
-php_version: 7.4
+php_version: 8.0
 database:
   version: 10.4
-drush_version: 10
 build_step: true
 protected_web_paths:
   - /private/

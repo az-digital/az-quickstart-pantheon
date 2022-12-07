@@ -32,12 +32,12 @@ _(Replace `my-site` with actual Pantheon site name and modify account name, emai
 
 This file (`settings.upstream.php`) is included to add upstream-wide configuration to all sites using the upstream. It is strongly suggested that you not delete or modify this file as it may cause reliability issues with your site. If site-specific configuration is needed, please use `settings.php`.
 
-When tasked with migrating a UA Site or Quickstart 1 site to an Arizona Site or Quickstart 2 custom site these are the steps:
+When tasked with migrating a Quickstart 1 site to a Quickstart 2 site these are the steps:
 
-Find the source site machine name in the ticket assigned to you.
-Find the destination site machine name in the ticket assigned to you.
+Find the source site machine name.
+Find the destination site machine name.
 
-Double check that the source site and destination sites exist in pantheon and have a live site environment associated with them.
+Double check that the source site and destination sites exist in Pantheon and have a live site environment associated with them.
 
 ```
 terminus env:view <sourcesitename.live>
@@ -46,61 +46,22 @@ terminus env:view <destinationsitename.live>
 
 Once you've determined that a site is truly eligible to be migrated, follow these steps.
 
-Here is my process for running migrations that fail remotely via terminus, or during GH actions.
+## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from Pantheon
 
-## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from pantheon locally.
+NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site.
 
-NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on pantheon, since it uses terminus to find site variables on the source site.
-
-From the parent directory where you want to create your local copy of a site on
-pantheon.
+From the parent directory where you want to create your local copy of the **destination**
+site on Pantheon.
 
 ```
-mkdir <sitename> && cd "$_"
+mkdir <destinationsitename> && cd "$_"
 lando init --source pantheon
 ```
 
-This starts the interactive site creation tool when you should be able to choose
-your destination site.
+This starts the interactive site creation tool that allows you to choose
+your destination site from a list of sites created on Pantheon.
 
-Let’s check our remote settings.
-
-```
-git remote -v
-```
-
-The above command should have an output like this
-
-```
-origin	ssh://codeserver.dev.ca424136-e0.drush.in:2222/~/repository.git (fetch)
-origin	ssh://codeserver.dev.ca424136-e0.drush.in:2222/~/repository.git (push)
-upstream	https://github.com/az-digital/az-quickstart-pantheon.git (fetch)
-upstream	https://github.com/az-digital/az-quickstart-pantheon.git (push)
-```
-
-If you don’t have an upstream remote listed, you can add it.
-
-```
-git remote add upstream https://github.com/az-digital/az-quickstart-pantheon.git
-```
-
-Then when you do `git remote -v` you should see the desired output.
-
-In order for your local git to see all the files and branches on the upstream we
-need to fetch the upstream.
-
-```
-git fetch upstream issue/83
-```
-
-Now, we need to checkout the scripts and Lando config we need from the upstream
-branch.
-
-```
-git checkout upstream/issue/83 .lando.upstream.yml scripts/lando/migrate-db-import.sh scripts/lando/migrate-setup-from-pantheon.sh
-```
-
-The next step is to start lando…. Then you can go to one of the listed URLs upon
+The next step is to start lando. After which you can go to one of the listed URLs upon
 success
 
 ```
@@ -115,8 +76,9 @@ pantheon config. Particularly, these two:
   // lando migrate-setup-from-pantheon  Runs migrate-setup-from-pantheon commands
 ```
 
-Then you will want to use lando to pull the site locally (Typically I will get
-the live db and files, and dev codebase.)
+The next step is to use Lando to pull the destination site locally from the site that you created on Pantheon.
+(Typically you'll want to get the live db and files, and dev codebase.) If they do not yet exist on Pantheon, 
+Feel free to enable those environments for your destination site now. 
 
 ```
 lando pull -d live -f live -c none
@@ -138,7 +100,9 @@ https://github.com/az-digital/az-quickstart-pantheon/blob/master/web/sites/defau
 lando migrate-setup-from-pantheon -s <sourcesitename.env>
 ```
 
-Then import the resulting database into the new migrate database
+**NOTE:** The `migrate-setup-from-pantheon` command executes a [script](https://github.com/az-digital/az-quickstart-pantheon/blob/master/scripts/lando/migrate-setup-from-pantheon.sh) included with this repository.
+
+Then import the resulting database dump file into the newly created (by the script) `migrate` database
 
 ```
 lando migrate-db-import database.sql.gz
@@ -158,14 +122,14 @@ lando drush mim --group=az_migration
 Once the migrations are completed, you can push the files and database, but not
 the code back to dev, but first check the **migration status**.
 
-Check the migration status and post the results in the ticket assigned to you.
+Check the migration status.
 
 ```
 lando drush ms --group=az_migration > AZSITEMIGRATION.md
 cat AZSITEMIGRATION.md
 ```
 
-Note: we are not pushing code up at this time, because we don't want to add our settings.php changes or lando.upstream.yml or scripts back to pantheon.
+Note: we are not pushing code up at this time, because we don't want to add our settings.php changes back to Pantheon.
 
 ```
 lando push -c none -d dev -f dev
