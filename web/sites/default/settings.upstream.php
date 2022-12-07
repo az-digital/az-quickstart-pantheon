@@ -56,8 +56,8 @@ if (file_exists(MIGRATION_DB_CONFIG_FILE_PATH)) {
  *   simple 404 pages.
  *
  */
-$config['system.performance']['fast_404']['exclude_paths'] = '/\/(?:styles)|(?:autodiscover)\/|(?:system\/files)\/|(?:\/wp-login.php)|(?:\/xmlrpc.php)/';
-$config['system.performance']['fast_404']['paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
+$config['system.performance']['fast_404']['exclude_paths'] = '/\/(?:styles)|(?:system\/files)\//';
+$config['system.performance']['fast_404']['paths'] = '/(?:\/autodiscover\/autodiscover.xml)|(?:\/wp-login.php)|(?:\/xmlrpc.php)|\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
 $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 
 /**
