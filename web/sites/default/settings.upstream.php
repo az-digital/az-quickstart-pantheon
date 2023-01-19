@@ -59,7 +59,7 @@ if (file_exists(MIGRATION_DB_CONFIG_FILE_PATH)) {
 
 // Standard Fast 404 settings copied from default.settings.php.
 $config['system.performance']['fast_404']['exclude_paths'] = '/\/(?:styles)|(?:system\/files)\//';
-$config['system.performance']['fast_404']['paths'] = '/\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)|(xmlrpc.php)|(wp-login.php)|(autodiscover.xml)|(wlmanifest.xml)|(server-status)$/i';
+$config['system.performance']['fast_404']['paths'] = '/\.(?:\/autodiscover.xml)|(?:\/wp-login.php)|(?:\/xmlrpc.php)|(?:\/wp-admin)|\.(?:txt|png|gif|jpe?g|css|js|ico|swf|flv|cgi|bat|pl|dll|exe|asp)$/i';
 $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head><title>404 Not Found</title></head><body><h1>Not Found</h1><p>The requested URL "@path" was not found on this server.</p></body></html>';
 $config['system.performance']['fast_404']['enabled'] = TRUE;
 
