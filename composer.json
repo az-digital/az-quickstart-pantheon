@@ -1,6 +1,6 @@
 {
     "name": "az-digital/az-quickstart-pantheon",
-    "description": "Patheon-compatible build for AZ Quickstart Sites.",
+    "description": "Pantheon-compatible build for AZ Quickstart Sites.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "repositories": [
