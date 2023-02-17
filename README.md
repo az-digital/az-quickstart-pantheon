@@ -116,6 +116,13 @@ terminus drush <sitename>.test -- config-distro-update
    
 ```
 
+Optionally add new permissions from the upstream onto the az_quickstart managed roles:
+
+```
+terminus drush <sitename>.test -- az-core-config-add-permissions -y
+```
+
+
 For `live`:
 
 ```
@@ -126,6 +133,11 @@ terminus drush <sitename>.live -- config-distro-update
    
 ```
 
+Optionally add new permissions from the upstream onto the az_quickstart managed roles:
+
+```
+terminus drush <sitename>.live -- az-core-config-add-permissions -y
+```
 
 ## Determining whether the Quickstart 1 to Quickstart 2 migration path is viable for your site.
 
