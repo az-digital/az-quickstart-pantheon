@@ -104,7 +104,7 @@ terminus drush <sitename>.<environment> -- config-distro-update
 
 Now that you've successfully updated your site, you can also deploy to test and live from the command line.
 
-**Important** Always create a backup before running database updates or importing distribution updates.
+**Important:** Always create a backup before running database updates or importing distribution updates.
 
 For `test`:
 
