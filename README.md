@@ -99,10 +99,13 @@ terminus drush <sitename>.<environment> -- config-distro-update
 
 Now that you've successfully updated your site, you can also deploy to test and live from the command line.
 
+**Important** Always create a backup before running database updates or importing distribution updates.
+
 For `test`:
 
 ```
-terminus env:deploy <sitename>.test --updatedb   
+terminus backup:create <sitename>.test
+terminus env:deploy <sitename>.test --updatedb --sync-content
 terminus drush <sitename>.test -- -y state:set config_sync.update_mode 1 --input-format=integer
 terminus drush <sitename>.test -- config-distro-update
    
@@ -111,6 +114,7 @@ terminus drush <sitename>.test -- config-distro-update
 For `live`:
 
 ```
+terminus backup:create <sitename>.live
 terminus env:deploy <sitename>.live --updatedb   
 terminus drush <sitename>.live -- -y state:set config_sync.update_mode 1 --input-format=integer
 terminus drush <sitename>.live -- config-distro-update
