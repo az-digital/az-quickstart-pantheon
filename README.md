@@ -42,17 +42,17 @@ This file (`settings.upstream.php`) is included to add upstream-wide configurati
 ### Requirements
 - [Terminus installed on your computer](https://docs.pantheon.io/terminus/install)
 - A Quickstart 2 site installed on Pantheon, in at least one environment.
-- The machine name of the site you want to update, this will be referred to as `<sitename>` for the rest of this tutorial.
-- The machine name of the environment you want to update. Some examples are: `dev`, `test`, `live`, this will be referred to as `<environment>` for the rest of this tutorial. (Upstream updates can only be applied to multi-dev or dev environments)
+- The machine name of the site you want to update: this will be referred to as `<sitename>` for the rest of this tutorial.
+- The machine name of the environment you want to update: this will be referred to as `<environment>` for the rest of this tutorial. Some examples are `dev`, `test`,  and `live`. (Upstream updates can only be applied to multi-dev or dev environments.)
 - Access to the site and environment you would like to update.
 
-Each of the following steps has a counter-part within either, the Pantheon Dashboard, or the Quickstart administration user interface.
+Each of the following steps has a counterpart within either the Pantheon Dashboard or the Quickstart administration user interface.
 
 ### Step 1: Apply upstream updates to the `dev` environment.
 
 When new upstream updates are released, `dev` or multi-dev environments should be eligible to accept them.
 
-**Important** Always create a backup before running database updates or importing distribution updates.
+**Important:** Always create a backup before running database updates or importing distribution updates.
 
 ```
 terminus backup:create <sitename>.<environment>
