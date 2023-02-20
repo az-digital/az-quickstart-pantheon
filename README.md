@@ -8,6 +8,11 @@ For more information and detailed installation guides, please visit the Integrat
 
 This upstream is maintained by [Campus Web Services](https://web.arizona.edu) in collaboration with the [Arizona Digital](https://digitial.arizona.edu) team and it tracks the latest stable release of Arizona Quickstart.
 
+## Useful links to Pantheon Documentation.
+- [Apply Upstream Updates Manually from the Command Line to Resolve Merge Conflicts](https://docs.pantheon.io/core-updates#apply-upstream-updates-manually-from-the-command-line-to-resolve-merge-conflicts).
+- [The recommended workflow](https://docs.pantheon.io/pantheon-workflow)
+- [The out of normal operation Pantheon Hotfix workflow](https://docs.pantheon.io/hotfixes)
+
 ## Note about installing Drupal
 
 Because Quickstart is a relatively large install profile, we recommend performing the site install (Drupal installation) via drush (and terminus) to avoid installation problems that can be encountered when performing an interactive/web install (via `install.php`) due to [Pantheon's strict web request timeout configuration](https://pantheon.io/docs/timeouts).
@@ -31,6 +36,110 @@ _(Replace `my-site` with actual Pantheon site name and modify account name, emai
 ## Upstream Settings (settings.upstream.php)
 
 This file (`settings.upstream.php`) is included to add upstream-wide configuration to all sites using the upstream. It is strongly suggested that you not delete or modify this file as it may cause reliability issues with your site. If site-specific configuration is needed, please use `settings.php`.
+
+## Updating Quickstart 2 on Pantheon via the command line.
+
+### Requirements
+- [Terminus installed on your computer](https://docs.pantheon.io/terminus/install)
+- A Quickstart 2 site installed on Pantheon, in at least one environment.
+- The machine name of the site you want to update: this will be referred to as `<sitename>` for the rest of this tutorial.
+- The machine name of the environment you want to update: this will be referred to as `<environment>` for the rest of this tutorial. Some examples are `dev`, `test`,  and `live`. (Upstream updates can only be applied to multi-dev or dev environments.)
+- Access to the site and environment you would like to update.
+
+Each of the following steps has a counterpart within either the Pantheon Dashboard or the Quickstart administration user interface.
+
+### Step 1: Apply upstream updates to the `dev` environment.
+
+When new upstream updates are released, `dev` or multi-dev environments should be eligible to accept them.
+
+**Important:** Always create a backup before running database updates or importing distribution updates.
+
+```
+terminus backup:create <sitename>.<environment>
+```
+
+Check if there are upstream updates available.
+
+```
+ terminus upstream:updates:status <sitename>.<environment>
+```
+
+If outdated, list the available updates.
+
+```
+ terminus upstream:updates:list <sitename>.<environment>
+```
+
+Apply the upstream updates to the environment.
+
+```
+ terminus upstream:updates:apply <sitename>.<environment>
+```
+
+### Step 2: Update the database.
+
+Once your site's codebase is up to date, it is important to run database updates and distribution updates.
+
+
+Updating the database can be done via the command line:
+```
+terminus drush <sitename>.<environment> -- updatedb
+```
+**Important:** Always ensure your site is set on the correct strategy for importing distribution updates.
+For Quickstart, it is recommended to use the merge strategy when importing distribution updates, which can be set via drush, or within the Admin UI.
+
+It is advisable that you familiarize yourself with the functionality of the [Config Distro](https://www.drupal.org/project/config_distro) module to get the most out of Quickstart.
+
+```
+terminus drush <sitename>.<environment> -- -y state:set config_sync.update_mode 1 --input-format=integer
+```
+
+Importing distribution updates can be done via the command line:
+
+```
+terminus drush <sitename>.<environment> -- config-distro-update
+```
+
+### Step 3: Test and apply updates to test and live.
+
+Now that you've successfully updated your site, you can also deploy to test and live from the command line.
+
+**Important:** Always create a backup before running database updates or importing distribution updates.
+
+For `test`:
+
+```
+terminus backup:create <sitename>.test
+terminus env:deploy <sitename>.test --updatedb --sync-content
+terminus drush <sitename>.test -- -y state:set config_sync.update_mode 1 --input-format=integer
+terminus drush <sitename>.test -- config-distro-update
+   
+```
+
+Optionally add new permissions from the upstream onto the az_quickstart managed roles:
+
+```
+terminus drush <sitename>.test -- az-core-config-add-permissions -y
+```
+
+
+For `live`:
+
+```
+terminus backup:create <sitename>.live
+terminus env:deploy <sitename>.live --updatedb   
+terminus drush <sitename>.live -- -y state:set config_sync.update_mode 1 --input-format=integer
+terminus drush <sitename>.live -- config-distro-update
+   
+```
+
+Optionally add new permissions from the upstream onto the az_quickstart managed roles:
+
+```
+terminus drush <sitename>.live -- az-core-config-add-permissions -y
+```
+
+## Determining whether the Quickstart 1 to Quickstart 2 migration path is viable for your site.
 
 When tasked with migrating a Quickstart 1 site to a Quickstart 2 site these are the steps:
 
