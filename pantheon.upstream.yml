@@ -1,7 +1,7 @@
 api_version: 1
 web_docroot: true
 # See https://pantheon.io/docs/pantheon-yml/#enforce-https--hsts for valid
-# values. Overridding this setting with either "full" or "full+subdomains" in
+# values. Overriding this setting with either "full" or "full+subdomains" in
 # the site-specific pantheon.yml file is recommended prior to site go-live.
 enforce_https: transitional
 php_version: 8.0
