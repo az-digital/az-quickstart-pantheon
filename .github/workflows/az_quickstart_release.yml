@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.REPO_DISPATCH_TOKEN }}
       - name: Create new branch and PR
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
