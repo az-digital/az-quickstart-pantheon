@@ -16,7 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: shivammathur/setup-php@d2f58713aaf7809d0c4d11e827c9e9dbbc55b34e
         with:
-            php-version: 7.4
+            php-version: 8.1
             tools: composer:v2
       - name: Find the pull request source branch name
         if: ${{ github.event_name == 'pull_request' }}
