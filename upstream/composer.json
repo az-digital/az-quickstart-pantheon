@@ -22,5 +22,8 @@
         "oomphinc/composer-installers-extender": "^2.0.0",
         "pantheon-systems/drupal-integrations": "^10",
         "zaporylie/composer-drupal-optimizations": "^1.2"
+    },
+    "extra": {
+        "enable-patching": true
     }
 }
