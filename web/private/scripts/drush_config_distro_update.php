@@ -7,7 +7,7 @@ echo "Config Distro update complete.\n";
 
 echo "Syncing permissions...\n";
 passthru('drush -n -y az-core-config-add-permissions');
-echo "Config Distro update complete.\n";
+echo "Permissions sync complete.\n";
 
 // Rebuild the cache.
 echo "Clearing cache.\n";
