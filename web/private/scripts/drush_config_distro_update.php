@@ -5,10 +5,6 @@ echo "Running Config Distro update...\n";
 passthru('drush -n -y config-distro-update --update-mode=1');
 echo "Config Distro update complete.\n";
 
-echo "Syncing permissions...\n";
-passthru('drush -n -y az-core-config-add-permissions');
-echo "Permissions sync complete.\n";
-
 // Rebuild the cache.
 echo "Clearing cache.\n";
 passthru('drush cr');
