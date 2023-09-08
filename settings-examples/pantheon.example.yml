@@ -18,9 +18,17 @@ workflows:
       - type: webphp
         description: Run Config Distro Update with Drush
         script: private/scripts/drush_config_distro_update.php
+      # Sync permissions after running Config Distro Update.
+      - type: webphp
+        description: Sync Permissions with Drush
+        script: private/scripts/drush_az_quickstart_sync_permissions.php
   sync_code:
     after:
       # Run Config Distro update when pushing/syncing code into dev/multidev.
       - type: webphp
         description: Run Config Distro Update with Drush
         script: private/scripts/drush_config_distro_update.php
+      # Sync permissions after running Config Distro Update.
+      - type: webphp
+        description: Sync Permissions with Drush
+        script: private/scripts/drush_az_quickstart_sync_permissions.php
