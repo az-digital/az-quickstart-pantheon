@@ -96,7 +96,6 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['test', 'live'])) {
     $settings['config_readonly'] = TRUE;
   }
-  
   /**
    * Environment-specific performance and caching configuration overrides.
    *
