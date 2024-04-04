@@ -64,11 +64,6 @@ $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head>
 $config['system.performance']['fast_404']['enabled'] = TRUE;
 
 /**
- * Exclude dev modules + associated config from config exports/imports.
- */
-$settings['config_exclude_modules'] = ['devel', 'field_ui', 'views_ui'];
-
-/**
  * Default configuration for all Pantheon Environment requests.
  *
  * Settings in this block will be loaded for ALL requests (web and CLI) to
@@ -88,13 +83,6 @@ if (defined('PANTHEON_ENVIRONMENT')) {
       header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
       exit();
     }
-  }
-
-  /**
-   * Enable config_readonly (if installed) on test and live environments.
-   */
-  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['test', 'live'])) {
-    $settings['config_readonly'] = TRUE;
   }
 
   /**
