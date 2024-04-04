@@ -83,7 +83,7 @@ Key features and configurations included in `settings.upstream.php`:
 ## Updating Quickstart 2 on Pantheon via the command line.
 
 ### Requirements
-- Terminus installed on your computer](https://docs.pantheon.io/terminus/install)
+- [Terminus installed on your computer](https://docs.pantheon.io/terminus/install)
 - A Quickstart 2 site installed on Pantheon, in at least one environment.
 - The machine name of the site you want to update: this will be referred to as `<sitename>` for the rest of this tutorial.
 - The machine name of the environment you want to update: this will be referred to as `<environment>` for the rest of this tutorial. Some examples are `dev`, `test`,  and `live`. (Upstream updates can only be applied to multi-dev or dev environments.)
