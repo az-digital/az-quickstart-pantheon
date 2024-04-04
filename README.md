@@ -10,8 +10,8 @@ This upstream is maintained by [Campus Web Services](https://web.arizona.edu) in
 
 ## Useful links to Pantheon Documentation.
 - [Apply Upstream Updates Manually from the Command Line to Resolve Merge Conflicts](https://docs.pantheon.io/core-updates#apply-upstream-updates-manually-from-the-command-line-to-resolve-merge-conflicts).
-- The recommended workflow](https://docs.pantheon.io/pantheon-workflow)
-- The out of normal operation Pantheon Hotfix workflow](https://docs.pantheon.io/hotfixes)
+- [The recommended workflow](https://docs.pantheon.io/pantheon-workflow)
+- [The out of normal operation Pantheon Hotfix workflow](https://docs.pantheon.io/hotfixes)
 
 ## Note about installing Drupal
 
