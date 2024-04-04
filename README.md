@@ -9,9 +9,9 @@ For more information and detailed installation guides, please visit the Integrat
 This upstream is maintained by [Campus Web Services](https://web.arizona.edu) in collaboration with the [Arizona Digital](https://digitial.arizona.edu) team and it tracks the latest stable release of Arizona Quickstart.
 
 ## Useful links to Pantheon Documentation.
-- [Apply Upstream Updates Manually from the Command Line to Resolve Merge Conflicts](https://docs.pantheon.io/core-updates#apply-upstream-updates-manually-from-the-command-line-to-resolve-merge-conflicts).
-- [The recommended workflow](https://docs.pantheon.io/pantheon-workflow)
-- [The out of normal operation Pantheon Hotfix workflow](https://docs.pantheon.io/hotfixes)
+- Apply Upstream Updates Manually from the Command Line to Resolve Merge Conflicts](https://docs.pantheon.io/core-updates#apply-upstream-updates-manually-from-the-command-line-to-resolve-merge-conflicts).
+- The recommended workflow](https://docs.pantheon.io/pantheon-workflow)
+- The out of normal operation Pantheon Hotfix workflow](https://docs.pantheon.io/hotfixes)
 
 ## Note about installing Drupal
 
@@ -35,12 +35,55 @@ _(Replace `my-site` with actual Pantheon site name and modify account name, emai
 
 ## Upstream Settings (settings.upstream.php)
 
-This file (`settings.upstream.php`) is included to add upstream-wide configuration to all sites using the upstream. It is strongly suggested that you not delete or modify this file as it may cause reliability issues with your site. If site-specific configuration is needed, please use `settings.php`.
+This file (`settings.upstream.php`) is included to add upstream-wide
+configuration to all sites using the upstream. It is strongly suggested that you
+not delete or modify this file as it may cause reliability issues with your
+site. If site-specific configuration is needed, please use `settings.php`.
+
+### What is in settings.upstream.php
+
+The `settings.upstream.php` file in the Arizona Quickstart Composer-enabled
+Pantheon Upstream includes a variety of important configurations designed to
+optimize the performance, security, and reliability of Drupal sites on the
+Pantheon platform. This file is maintained by the upstream maintainers (Arizona
+Digital) and should not be modified by individual site administrators.
+Site-specific changes should be made in the `settings.php` file.
+
+Key features and configurations included in `settings.upstream.php`:
+
+- **Migration Database Configuration:** Supports loading database configuration
+  for migrations from a JSON file located in
+  `sites/default/files/private/migration_config.json`. This allows for seamless
+  migration database connections without hardcoding sensitive information.
+
+- **Redis Configuration:** Configures Redis as the default cache backend for
+  enhanced performance, utilizing Pantheon's integrated Redis service. This
+  configuration includes settings for connection details, cache bins
+  optimization, and the use of Redis for container cache to improve site
+  responsiveness.
+
+- **Fast 404 Pages:** Implements efficient handling of 404 errors by serving
+  simple, fast-loading 404 pages for paths matching specific patterns. This
+  reduces the overhead of fully themed 404 pages for missing resources, saving
+  bandwidth and reducing server load.
+
+
+- **Pantheon Environment-Specific Configurations:**
+  - **HTTPS Redirection:** For all Pantheon environments, HTTP requests to
+    `.pantheonsite.io` domains are redirected to HTTPS to enforce secure
+    connections.
+  - **Performance and Caching Settings:** Adjusts cache lifetimes and
+    aggregation settings based on the environment (development vs. test/live),
+    optimizing performance across different stages of the site lifecycle.
+  - **Environment Indicator:** Provides visual indicators in the Drupal admin
+    interface to show which Pantheon environment (e.g., `dev`, `test`, `live`,
+    or development branch) you're currently working in, aiding in environment
+    awareness.
 
 ## Updating Quickstart 2 on Pantheon via the command line.
 
 ### Requirements
-- [Terminus installed on your computer](https://docs.pantheon.io/terminus/install)
+- Terminus installed on your computer](https://docs.pantheon.io/terminus/install)
 - A Quickstart 2 site installed on Pantheon, in at least one environment.
 - The machine name of the site you want to update: this will be referred to as `<sitename>` for the rest of this tutorial.
 - The machine name of the environment you want to update: this will be referred to as `<environment>` for the rest of this tutorial. Some examples are `dev`, `test`,  and `live`. (Upstream updates can only be applied to multi-dev or dev environments.)
@@ -113,7 +156,7 @@ terminus backup:create <sitename>.test
 terminus env:deploy <sitename>.test --updatedb --sync-content
 terminus drush <sitename>.test -- -y state:set config_sync.update_mode 1 --input-format=integer
 terminus drush <sitename>.test -- config-distro-update
-   
+
 ```
 
 Optionally add new permissions from the upstream onto the az_quickstart managed roles:
@@ -127,10 +170,10 @@ For `live`:
 
 ```
 terminus backup:create <sitename>.live
-terminus env:deploy <sitename>.live --updatedb   
+terminus env:deploy <sitename>.live --updatedb
 terminus drush <sitename>.live -- -y state:set config_sync.update_mode 1 --input-format=integer
 terminus drush <sitename>.live -- config-distro-update
-   
+
 ```
 
 Optionally add new permissions from the upstream onto the az_quickstart managed roles:
@@ -186,8 +229,8 @@ pantheon config. Particularly, these two:
 ```
 
 The next step is to use Lando to pull the destination site locally from the site that you created on Pantheon.
-(Typically you'll want to get the live db and files, and dev codebase.) If they do not yet exist on Pantheon, 
-Feel free to enable those environments for your destination site now. 
+(Typically you'll want to get the live db and files, and dev codebase.) If they do not yet exist on Pantheon,
+Feel free to enable those environments for your destination site now.
 
 ```
 lando pull -d live -f live -c none
