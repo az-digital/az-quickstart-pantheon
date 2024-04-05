@@ -1,6 +1,6 @@
 version: 2
 updates:
   - package-ecosystem: "composer"
-    directory: "/upstream" # Location of package manifests
+    directory: "/upstream"
     schedule:
       interval: "weekly"
