@@ -4,3 +4,5 @@ updates:
     directory: "/upstream"
     schedule:
       interval: "weekly"
+    reviewers:
+      - "az-digital/developers"
