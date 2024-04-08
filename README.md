@@ -156,7 +156,6 @@ terminus backup:create <sitename>.test
 terminus env:deploy <sitename>.test --updatedb --sync-content
 terminus drush <sitename>.test -- -y state:set config_sync.update_mode 1 --input-format=integer
 terminus drush <sitename>.test -- config-distro-update
-
 ```
 
 Optionally add new permissions from the upstream onto the az_quickstart managed roles:
@@ -173,7 +172,6 @@ terminus backup:create <sitename>.live
 terminus env:deploy <sitename>.live --updatedb
 terminus drush <sitename>.live -- -y state:set config_sync.update_mode 1 --input-format=integer
 terminus drush <sitename>.live -- config-distro-update
-
 ```
 
 Optionally add new permissions from the upstream onto the az_quickstart managed roles:
