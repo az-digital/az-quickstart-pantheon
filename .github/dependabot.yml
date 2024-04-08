@@ -1,0 +1,8 @@
+version: 2
+updates:
+  - package-ecosystem: "composer"
+    directory: "/upstream"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "az-digital/developers"
