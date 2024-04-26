@@ -1,7 +1,5 @@
 <?php
 
-use Drupal\Core\Installer\InstallerKernel;
-
 /**
  * @file
  * Upstream configuration file for AZ QuickStart sites.
