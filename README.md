@@ -56,17 +56,10 @@ Key features and configurations included in `settings.upstream.php`:
   `sites/default/files/private/migration_config.json`. This allows for seamless
   migration database connections without hardcoding sensitive information.
 
-- **Redis Configuration:** Configures Redis as the default cache backend for
-  enhanced performance, utilizing Pantheon's integrated Redis service. This
-  configuration includes settings for connection details, cache bins
-  optimization, and the use of Redis for container cache to improve site
-  responsiveness.
-
 - **Fast 404 Pages:** Implements efficient handling of 404 errors by serving
   simple, fast-loading 404 pages for paths matching specific patterns. This
   reduces the overhead of fully themed 404 pages for missing resources, saving
   bandwidth and reducing server load.
-
 
 - **Pantheon Environment-Specific Configurations:**
   - **HTTPS Redirection:** For all Pantheon environments, HTTP requests to
