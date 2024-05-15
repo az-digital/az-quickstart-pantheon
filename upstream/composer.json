@@ -6,11 +6,15 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
         "php": ">=8.1",
-        "az-digital/az_quickstart": "2.10.1",
+        "az-digital/az_quickstart": "2.10.2",
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
         "drupal/config_import_single": "2.0.0",
@@ -25,5 +29,7 @@
     },
     "extra": {
         "enable-patching": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
