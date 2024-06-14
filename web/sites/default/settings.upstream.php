@@ -137,28 +137,22 @@ if (defined('PANTHEON_ENVIRONMENT')) {
         // Localdev or Lando environments.
         $config['environment_indicator.indicator']['name'] = 'Local Dev';
         $config['environment_indicator.indicator']['bg_color'] = '#990055';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
       case 'dev':
         $config['environment_indicator.indicator']['name'] = 'Dev';
         $config['environment_indicator.indicator']['bg_color'] = '#4a634e';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
       case 'test':
         $config['environment_indicator.indicator']['name'] = 'Test';
         $config['environment_indicator.indicator']['bg_color'] = '#a95c42';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
       case 'live':
         $config['environment_indicator.indicator']['name'] = 'LIVE';
-        $config['environment_indicator.indicator']['bg_color'] = '#0f0f0f';
-        $config['environment_indicator.indicator']['fg_color'] = '#dddddd';
         break;
       default:
         // Multidev catchall.
         $config['environment_indicator.indicator']['name'] = 'Multidev: ' . $_ENV['PANTHEON_ENVIRONMENT'];
         $config['environment_indicator.indicator']['bg_color'] = '#1e5288';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
     }
   }
@@ -166,5 +160,4 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 else {
   $config['environment_indicator.indicator']['name'] = 'Local';
   $config['environment_indicator.indicator']['bg_color'] = '#707070';
-  $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
 }
