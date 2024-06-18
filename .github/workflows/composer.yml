@@ -28,7 +28,7 @@ jobs:
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
           composer require --working-dir=upstream --no-update az-digital/az_quickstart:dev-${QUICKSTART_BRANCH}
-          git add composer.json
+          git add upstream/composer.json
           git commit -m "Use ${QUICKSTART_BRANCH} Quickstart branch." 
       - name: Simulate Pantheon's composer install command
         run: composer --no-cache --no-interaction --no-progress --prefer-dist --ansi install
