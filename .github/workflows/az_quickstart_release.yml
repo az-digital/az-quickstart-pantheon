@@ -11,16 +11,35 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Get current version from upstream composer.json
+        id: get_version
+        run: |
+          CURRENT_VERSION=$(jq -r '.require."az-digital/az_quickstart"' upstream/composer.json)
+          CURRENT_MINOR_VERSION=$(echo $CURRENT_VERSION | awk -F. '{print $1"."$2}')
+          TARGET_VERSION="${{ github.event.client_payload.version }}"
+          TARGET_MINOR_VERSION=$(echo $TARGET_VERSION | awk -F. '{print $1"."$2}')
+          echo "CURRENT_MINOR_VERSION=$CURRENT_MINOR_VERSION" >> $GITHUB_ENV
+          echo "TARGET_MINOR_VERSION=$TARGET_MINOR_VERSION" >> $GITHUB_ENV
+          echo "### :rocket: Version Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- **Current Minor Version:** \`$CURRENT_MINOR_VERSION\` :white_check_mark:" >> $GITHUB_STEP_SUMMARY
+          echo "- **Target Minor Version:** \`$TARGET_MINOR_VERSION\` :white_check_mark:" >> $GITHUB_STEP_SUMMARY
+          if [ "$CURRENT_MINOR_VERSION" == "$TARGET_MINOR_VERSION" ]; then
+            echo "### :tada: The target version matches the current minor version and a new pull request will be created!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### :x: The target version does not match the current minor version and a new pull request will not be created." >> $GITHUB_STEP_SUMMARY
+          fi
+
       - name: Create new branch and PR
-        if: ${{ startsWith( github.event.client_payload.version, '2.1' ) }}
+        if: env.CURRENT_MINOR_VERSION == env.TARGET_MINOR_VERSION
         run: |
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
           git config --global user.name "${GITHUB_ACTOR}"
-          git checkout -b 'az-quickstart-${{ github.event.client_payload.version }}'
+          git checkout -b "az-quickstart-${{ github.event.client_payload.version }}"
           jq --indent 4 '.require."az-digital/az_quickstart" |= "${{ github.event.client_payload.version }}"' upstream/composer.json > upstream/composer.json.new
           mv upstream/composer.json.new upstream/composer.json
           git add upstream/composer.json
-          git commit -m 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}'
-          git push --set-upstream origin 'az-quickstart-${{ github.event.client_payload.version }}'
+          git commit -m "Update Arizona Quickstart to ${{ github.event.client_payload.version }}"
+          git push --set-upstream origin "az-quickstart-${{ github.event.client_payload.version }}"
           echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
-          gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body 'Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}'
+          gh pr create --title "Update Arizona Quickstart to ${{ github.event.client_payload.version }}" --body "Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}"
