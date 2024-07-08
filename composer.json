@@ -1,6 +1,6 @@
 {
     "name": "az-digital/az-quickstart-pantheon",
-    "description": "Patheon-compatible build for AZ Quickstart Sites.",
+    "description": "Pantheon-compatible build for AZ Quickstart Sites.",
     "type": "project",
     "license": "GPL-2.0-or-later",
     "repositories": [
@@ -30,7 +30,14 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "platform": {
-            "php": "7.4"
+            "php": "8.1"
+        },
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "oomphinc/composer-installers-extender": true,
+            "zaporylie/composer-drupal-optimizations": true
         }
     },
     "extra": {

@@ -6,12 +6,11 @@ on:
 jobs:
   release:
     name: Create PR
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
+      - name: Checkout code
+        uses: actions/checkout@v3
       - name: Create new branch and PR
         if: ${{ startsWith( github.event.client_payload.version, '2.1' ) }}
         run: |
@@ -23,5 +22,5 @@ jobs:
           git add upstream/composer.json
           git commit -m 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}'
           git push --set-upstream origin 'az-quickstart-${{ github.event.client_payload.version }}'
-          echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
-          gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body ''
+          echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
+          gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body 'Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}'

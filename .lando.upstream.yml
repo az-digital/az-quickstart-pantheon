@@ -1,0 +1,31 @@
+tooling:
+  # After running 'install' you can use this command prepare your lando site for migration.
+  migrate-setup-from-pantheon:
+    service: appserver
+    cmd:
+      - /bin/bash /app/scripts/lando/migrate-setup-from-pantheon.sh
+    options:
+      - site:
+          description: The Pantheon source site name and environment.
+          default: none
+          alias:
+            - s
+          interactive:
+            type: input
+            message: Add the source site name and environment you wish to pull files from <sitename.env>
+            default: none
+            weight: 600
+  "migrate-db-import <file>":
+    service: :host
+    description: YOU MUST RUN LANDO PULL FIRST Imports a migration site dump file into a database service
+    cmd: /bin/bash /app/scripts/lando/migrate-db-import.sh
+    user: root
+    options:
+      host:
+        description: The database service to use
+        default: database
+        alias:
+          - h
+      no-wipe:
+        description: Do not destroy the existing database before an import
+        boolean: true
