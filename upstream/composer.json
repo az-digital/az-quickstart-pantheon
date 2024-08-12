@@ -19,7 +19,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/config_import_single": "2.0.0",
         "drupal/core-composer-scaffold": "~10.3.0",
-        "drupal/core-recommended": "^10.3",
+        "drupal/core-recommended": "~10.3.0",
         "drupal/pantheon_advanced_page_cache": "2.2.0",
         "drupal/redis": "1.7",
         "drush/drush": "^12.4.3",
