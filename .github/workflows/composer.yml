@@ -12,10 +12,11 @@ jobs:
     name: Test composer install
     steps:
       - uses: actions/checkout@v2
-      - uses: shivammathur/setup-php@d2f58713aaf7809d0c4d11e827c9e9dbbc55b34e
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-            php-version: 8.3
-            tools: composer:v2
+          php-version: '8.3'
+          tools: composer:v2
       - name: Find the pull request source branch name
         if: ${{ github.event_name == 'pull_request' }}
         run: echo "AZ_TRIMMED_REF=${GITHUB_HEAD_REF}" >> ${GITHUB_ENV}
