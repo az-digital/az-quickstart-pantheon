@@ -197,13 +197,13 @@ NOTE: Instructions for how to use Lando for local development when contributing 
 Create your local copy of the Pantheon **destination** site by initializing Lando inside an *empty* folder:
 ```
 mkdir <destination_site_name>
-cd <destinationsitename>
+cd <destination_site_name>
 lando init --source pantheon
 ```
 Or execute the bash commands:
 
 ```
-mkdir <destinationsitename> && cd "$_"
+mkdir <destination_site_name> && cd "$_"
 lando init --source pantheon
 ```
 
@@ -287,26 +287,26 @@ lando push -c none -d dev -f dev
 Open the dev site when the push is complete, and do a spot check
 
 ```
-terminus env:view <destinationsitename.env>
+terminus env:view <destination_site_name.env>
 ```
 
 **Always make a backup if overwriting live**
 
 ```
-terminus backup:create <destinationsitename.live>
+terminus backup:create <destination_site_name.live>
 ```
 
 If all looks good, go ahead and deploy your migration to another environment,
 overwriting that environment’s database and files.
 
 ```
-terminus env:clone-content <destinationsitename.dev> <target_env> --cc -y
+terminus env:clone-content <destination_site_name.dev> <target_env> --cc -y
 ```
 
 Check the destination site.
 
 ```
-terminus env:view <destinationsitename.live>
+terminus env:view <destination_site_name.live>
 ```
 
 ### Clean up
