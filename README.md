@@ -191,15 +191,16 @@ Once you've determined that a site is truly eligible to be migrated, follow thes
 
 ## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from Pantheon
 
-NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site. Getting started with local Lando developement can be found [here.](https://github.com/az-digital/az_quickstart/blob/main/CONTRIBUTING.md#local-development)
+NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site.
+NOTE: Instructions for how to use Lando for local development when contributing general fixes and enhancements to Quickstart (not Pantheon site specific) can be found in the [contributing guide in the main AZ Quickstart repository](https://github.com/az-digital/az_quickstart/blob/main/CONTRIBUTING.md#local-development).
 
-Create your local copy of the Pantheon **destination** site by initializing Lando inside and *empty* folder.
+Create your local copy of the Pantheon **destination** site by initializing Lando inside an *empty* folder:
 ```
-mkdir <destinationsitename>
+mkdir <destination_site_name>
 cd <destinationsitename>
 lando init --source pantheon
 ```
-Or execute the bash commands
+Or execute the bash commands:
 
 ```
 mkdir <destinationsitename> && cd "$_"
@@ -207,7 +208,7 @@ lando init --source pantheon
 ```
 
 This starts the interactive site creation tool that allows you to choose
-your destination site from a list of sites created on Pantheon. Select the branch you are working on from the dropdown. 
+your destination site from a list of sites created on Pantheon. Select the site you are working on from the dropdown. 
 
 The next step is to start lando. After which you can go to one of the listed URLs upon
 success
