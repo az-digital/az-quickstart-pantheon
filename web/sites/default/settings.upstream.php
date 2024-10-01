@@ -92,8 +92,9 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 
   /**
    * Enable config_readonly (if installed) on test and live environments.
+   * Disable config_readonly (if installed) if config is being changed via CLI.
    */
-  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['test', 'live'])) {
+  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['test', 'live']) && PHP_SAPI !== 'cli') {
     $settings['config_readonly'] = TRUE;
   }
 
