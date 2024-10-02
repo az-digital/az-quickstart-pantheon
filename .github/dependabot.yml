@@ -6,3 +6,4 @@ updates:
       interval: "weekly"
     reviewers:
       - "az-digital/developers"
+    open-pull-requests-limit: 10
