@@ -223,8 +223,10 @@ The next step is to use Lando to pull the destination site locally from the site
 (Typically you'll want to get the live db and files, and dev codebase.) If they do not yet exist on Pantheon,
 Feel free to enable those environments for your destination site now.
 
+Ensure that the dev environment has an up to date version of the site and then pull from dev.
+
 ```
-lando pull -d live -f live -c none
+lando pull -d dev -f dev -c none
 ```
 
 Then install composer dependencies
