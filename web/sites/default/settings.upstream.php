@@ -127,6 +127,11 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['system.performance']['js']['preprocess'] = 0;
   }
 
+  // Set a memory limit for ImageMagick on sites with < 512 MB of memory.
+  if (!\Drupal\Component\Utility\Environment::checkMemoryLimit('512M')) {
+    $config['imagemagick.settings']['prepend'] = '-limit memory 64MiB';
+  }
+
   /**
    * Environment Indicator module settings.
    * see: https://pantheon.io/docs/environment-indicator
