@@ -1,0 +1,17 @@
+name: Notify Campus Web Services
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  notify-cws:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.CWS_REPO_DISPATCH_TOKEN }}
+          repository: uaz-web/devops-tools
+          event-type: az_quickstart_release_available_on_pantheon

@@ -6,24 +6,29 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
         "php": ">=8.1",
-        "az-digital/az_quickstart": "2.8.0",
+        "az-digital/az_quickstart": "2.12.8",
         "composer/installers": "^2.0",
         "cweagans/composer-patches": "^1.7",
         "drupal/config_import_single": "2.0.0",
-        "drupal/core-composer-scaffold": "^10",
-        "drupal/core-recommended": "^10",
-        "drupal/pantheon_advanced_page_cache": "2.1.2",
-        "drupal/redis": "1.7",
-        "drush/drush": "^12",
+        "drupal/core-composer-scaffold": "~10.3.0",
+        "drupal/core-recommended": "~10.3.0",
+        "drupal/pantheon_advanced_page_cache": "2.3.1",
+        "drupal/redis": "1.8.0",
+        "drush/drush": "^12.4.3",
         "oomphinc/composer-installers-extender": "^2.0.0",
-        "pantheon-systems/drupal-integrations": "^10",
-        "zaporylie/composer-drupal-optimizations": "^1.2"
+        "pantheon-systems/drupal-integrations": "^10"
     },
     "extra": {
         "enable-patching": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

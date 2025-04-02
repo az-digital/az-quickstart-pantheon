@@ -64,6 +64,11 @@ $config['system.performance']['fast_404']['html'] = '<!DOCTYPE html><html><head>
 $config['system.performance']['fast_404']['enabled'] = TRUE;
 
 /**
+ * Exclude dev modules + associated config from config exports/imports.
+ */
+$settings['config_exclude_modules'] = ['devel', 'field_ui', 'views_ui'];
+
+/**
  * Default configuration for all Pantheon Environment requests.
  *
  * Settings in this block will be loaded for ALL requests (web and CLI) to
@@ -83,6 +88,14 @@ if (defined('PANTHEON_ENVIRONMENT')) {
       header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
       exit();
     }
+  }
+
+  /**
+   * Enable config_readonly (if installed) on test and live environments.
+   * Disable config_readonly (if installed) if config is being changed via CLI.
+   */
+  if (in_array($_ENV['PANTHEON_ENVIRONMENT'], ['test', 'live']) && PHP_SAPI !== 'cli') {
+    $settings['config_readonly'] = TRUE;
   }
 
   /**
@@ -114,6 +127,11 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $config['system.performance']['js']['preprocess'] = 0;
   }
 
+  // Set a memory limit for ImageMagick on sites with < 512 MB of memory.
+  if (!\Drupal\Component\Utility\Environment::checkMemoryLimit('512M')) {
+    $config['imagemagick.settings']['prepend'] = '-limit memory 64MiB';
+  }
+
   /**
    * Environment Indicator module settings.
    * see: https://pantheon.io/docs/environment-indicator
@@ -123,30 +141,24 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     switch ($_ENV['PANTHEON_ENVIRONMENT']) {
       case 'lando':
         // Localdev or Lando environments.
-        $config['environment_indicator.indicator']['name'] = 'Local Dev (Lando)';
+        $config['environment_indicator.indicator']['name'] = 'Local Dev';
         $config['environment_indicator.indicator']['bg_color'] = '#990055';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
       case 'dev':
-        $config['environment_indicator.indicator']['name'] = 'Dev (Pantheon)';
+        $config['environment_indicator.indicator']['name'] = 'Dev';
         $config['environment_indicator.indicator']['bg_color'] = '#4a634e';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
       case 'test':
-        $config['environment_indicator.indicator']['name'] = 'Test (Pantheon)';
+        $config['environment_indicator.indicator']['name'] = 'Test';
         $config['environment_indicator.indicator']['bg_color'] = '#a95c42';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
       case 'live':
-        $config['environment_indicator.indicator']['name'] = 'LIVE (Pantheon)';
-        $config['environment_indicator.indicator']['bg_color'] = '#0f0f0f';
-        $config['environment_indicator.indicator']['fg_color'] = '#dddddd';
+        $config['environment_indicator.indicator']['name'] = 'LIVE';
         break;
       default:
         // Multidev catchall.
-        $config['environment_indicator.indicator']['name'] = $_ENV['PANTHEON_ENVIRONMENT'] . ' (Pantheon)';
+        $config['environment_indicator.indicator']['name'] = 'Multidev: ' . $_ENV['PANTHEON_ENVIRONMENT'];
         $config['environment_indicator.indicator']['bg_color'] = '#1e5288';
-        $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
         break;
     }
   }
@@ -154,5 +166,4 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 else {
   $config['environment_indicator.indicator']['name'] = 'Local';
   $config['environment_indicator.indicator']['bg_color'] = '#707070';
-  $config['environment_indicator.indicator']['fg_color'] = '#ffffff';
 }

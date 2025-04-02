@@ -14,14 +14,10 @@ enforce_https: transitional
 workflows:
   deploy:
     after:
-      # Run Config Distro Update when deploying to test or live.
+      # Run Config Import when deploying to test or live.
       - type: webphp
-        description: Run Config Distro Update with Drush
-        script: private/scripts/drush_config_distro_update.php
-      # Sync permissions after running Config Distro Update.
-      - type: webphp
-        description: Sync Permissions with Drush
-        script: private/scripts/drush_az_quickstart_sync_permissions.php
+        description: Run Config Import with Drush
+        script: private/scripts/drush_config_import.php
   sync_code:
     after:
       # Run Config Distro update when pushing/syncing code into dev/multidev.
