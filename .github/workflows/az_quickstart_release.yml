@@ -25,5 +25,5 @@ jobs:
             echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
             gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body 'Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}'
           else
-            echo "### :x: This version is not marked as the latest release, and therefore no new pull request will be created." >> $GITHUB_STEP_SUMMARY
+            echo "### :x: This version is not marked as the latest release, and a new pull request will not be created." >> $GITHUB_STEP_SUMMARY
           fi
