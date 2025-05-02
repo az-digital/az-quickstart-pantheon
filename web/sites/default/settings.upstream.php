@@ -66,7 +66,7 @@ $config['system.performance']['fast_404']['enabled'] = TRUE;
 /**
  * Exclude dev modules + associated config from config exports/imports.
  */
-$settings['config_exclude_modules'] = ['devel', 'field_ui', 'views_ui'];
+$settings['config_exclude_modules'] = ['devel', 'field_ui', 'views_ui' , 'smart_title_ui'];
 
 /**
  * Default configuration for all Pantheon Environment requests.
