@@ -33,13 +33,17 @@ jobs:
       - name: Create new branch and PR
         if: env.CURRENT_MINOR_VERSION == env.TARGET_MINOR_VERSION
         run: |
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-          git config --global user.name "${GITHUB_ACTOR}"
-          git checkout -b "az-quickstart-${{ github.event.client_payload.version }}"
-          jq --indent 4 '.require."az-digital/az_quickstart" |= "${{ github.event.client_payload.version }}"' upstream/composer.json > upstream/composer.json.new
-          mv upstream/composer.json.new upstream/composer.json
-          git add upstream/composer.json
-          git commit -m "Update Arizona Quickstart to ${{ github.event.client_payload.version }}"
-          git push --set-upstream origin "az-quickstart-${{ github.event.client_payload.version }}"
-          echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
-          gh pr create --title "Update Arizona Quickstart to ${{ github.event.client_payload.version }}" --body "Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}"
+          if [ "${{ github.event.client_payload.make_latest }}" = "true" ]; then
+            git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+            git config --global user.name "${GITHUB_ACTOR}"
+            git checkout -b 'az-quickstart-${{ github.event.client_payload.version }}'
+            jq --indent 4 '.require."az-digital/az_quickstart" |= "${{ github.event.client_payload.version }}"' upstream/composer.json > upstream/composer.json.new
+            mv upstream/composer.json.new upstream/composer.json
+            git add upstream/composer.json
+            git commit -m 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}'
+            git push --set-upstream origin 'az-quickstart-${{ github.event.client_payload.version }}'
+            echo "${{ secrets.REPO_DISPATCH_TOKEN }}" | gh auth login --with-token
+            gh pr create --title 'Update Arizona Quickstart to ${{ github.event.client_payload.version }}' --body 'Release Notes: https://github.com/az-digital/az_quickstart/releases/tag/${{ github.event.client_payload.version }}'
+          else
+            echo "### :x: This version is not marked as the latest release, and a new pull request will not be created." >> $GITHUB_STEP_SUMMARY
+          fi
