@@ -181,7 +181,7 @@ Ensure your site is on the latest 2.14.x release prior to upgrading to prevent e
 
 ### Instructions
 1. Run `terminus upstream:list` to find the ID for the Quickstart 3 upstream.
-2. Run `terminus sute:upstream:set` and select the Quickstart 3 upstream.
+2. Run `terminus site:upstream:set` and select the Quickstart 3 upstream.
 3. Apply any pending database and config distro updates.
 
 
