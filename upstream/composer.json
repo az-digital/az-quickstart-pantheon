@@ -13,18 +13,19 @@
         }
     ],
     "require": {
-        "php": ">=8.1",
-        "az-digital/az_quickstart": "2.14.1",
-        "composer/installers": "^2.0",
+        "php": ">=8.3",
+        "az-digital/az_quickstart": "3.0.4",
+        "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7",
         "drupal/config_import_single": "2.0.2",
-        "drupal/core-composer-scaffold": "~10.5.0",
-        "drupal/core-recommended": "~10.5.0",
+        "drupal/core-composer-scaffold": "~11.2.0",
+        "drupal/core-recommended": "~11.2.0",
         "drupal/pantheon_advanced_page_cache": "2.3.3",
+        "drupal/pantheon_secrets": "1.0.6",
         "drupal/redis": "1.11.0",
-        "drush/drush": "^12.4.3 || ^13.4.0",
+        "drush/drush": "^13.6.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
-        "pantheon-systems/drupal-integrations": "^10"
+        "pantheon-systems/drupal-integrations": "^11"
     },
     "extra": {
         "enable-patching": true
