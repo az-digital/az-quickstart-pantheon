@@ -20,7 +20,7 @@
         "drupal/config_import_single": "2.0.2",
         "drupal/core-composer-scaffold": "~11.2.0",
         "drupal/core-recommended": "~11.2.0",
-        "drupal/pantheon_advanced_page_cache": "2.3.3",
+        "drupal/pantheon_advanced_page_cache": "2.3.4",
         "drupal/pantheon_secrets": "1.0.6",
         "drupal/redis": "1.11.0",
         "drush/drush": "^13.6.0",
