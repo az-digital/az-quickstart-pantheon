@@ -24,7 +24,8 @@
         "drupal/redis": "1.10.0",
         "drush/drush": "^12.4.3 || ^13.4.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
-        "pantheon-systems/drupal-integrations": "^10"
+        "pantheon-systems/drupal-integrations": "^10",
+        "pantheon-systems/pantheon_domain_masking": "2.1.0"
     },
     "extra": {
         "enable-patching": true
