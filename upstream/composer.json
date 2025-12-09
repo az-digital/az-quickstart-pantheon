@@ -21,7 +21,7 @@
         "drupal/core-composer-scaffold": "~10.5.0",
         "drupal/core-recommended": "~10.5.0",
         "drupal/pantheon_advanced_page_cache": "2.3.3",
-        "drupal/redis": "1.10.0",
+        "drupal/redis": "1.11.0",
         "drush/drush": "^12.4.3 || ^13.4.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "pantheon-systems/drupal-integrations": "^10",
