@@ -177,7 +177,7 @@ terminus drush <sitename>.live -- az-core-config-add-permissions -y
 The Quickstart 3 upstream is a new, separate upstream from Quickstart 2; you must switch your site's upstream in order to update to Quickstart 3.
 
 ### Before you begin
-Ensure your site is on the latest 2.14.x release prior to upgrading to prevent errors.
+Ensure your site is on the latest 2.14.x release, with all database updates and distribution updates applied or merged  prior to upgrading to prevent errors.
 
 ### Instructions
 1. Run `terminus upstream:list` to find the ID for the Quickstart 3 upstream.
