@@ -3,7 +3,7 @@ name: Notify Campus Web Services
 on:
   push:
     branches:
-      - master
+      - 3.x
 
 jobs:
   notify-cws:
