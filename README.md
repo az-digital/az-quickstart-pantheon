@@ -173,6 +173,18 @@ Optionally add new permissions from the upstream onto the az_quickstart managed 
 terminus drush <sitename>.live -- az-core-config-add-permissions -y
 ```
 
+## Upgrading to Quickstart 3
+The Quickstart 3 upstream is a new, separate upstream from Quickstart 2; you must switch your site's upstream in order to update to Quickstart 3.
+
+### Before you begin
+Ensure your site is on the latest 2.14.x release, with all database updates and distribution updates applied or merged  prior to upgrading to prevent errors.
+
+### Instructions
+1. Run `terminus upstream:list` to find the ID for the Quickstart 3 upstream.
+2. Run `terminus site:upstream:set` and select the Quickstart 3 upstream.
+3. Apply any pending database and config distro updates.
+
+
 ## Determining whether the Quickstart 1 to Quickstart 2 migration path is viable for your site.
 
 When tasked with migrating a Quickstart 1 site to a Quickstart 2 site these are the steps:
