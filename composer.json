@@ -41,9 +41,7 @@
         "installer-paths": {
             "web/core": ["type:drupal-core"],
             "web/libraries/{$name}": [
-                "type:bower-asset",
-                "type:drupal-library",
-                "type:npm-asset"
+                "type:drupal-library"
             ],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
@@ -54,10 +52,6 @@
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
         },
-        "installer-types": [
-            "bower-asset",
-            "npm-asset"
-        ],
         "patchLevel": {
             "drupal/core": "-p2"
         },
