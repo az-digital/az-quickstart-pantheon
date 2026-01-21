@@ -192,17 +192,23 @@ Once you've determined that a site is truly eligible to be migrated, follow thes
 ## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from Pantheon
 
 NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site.
+NOTE: Instructions for how to use Lando for local development when contributing general fixes and enhancements to Quickstart (not Pantheon site specific) can be found in the [contributing guide in the main AZ Quickstart repository](https://github.com/az-digital/az_quickstart/blob/main/CONTRIBUTING.md#local-development).
 
-From the parent directory where you want to create your local copy of the **destination**
-site on Pantheon.
+Create your local copy of the Pantheon **destination** site by initializing Lando inside an *empty* folder:
+```
+mkdir <destination_site_name>
+cd <destination_site_name>
+lando init --source pantheon
+```
+Or execute the bash commands:
 
 ```
-mkdir <destinationsitename> && cd "$_"
+mkdir <destination_site_name> && cd "$_"
 lando init --source pantheon
 ```
 
 This starts the interactive site creation tool that allows you to choose
-your destination site from a list of sites created on Pantheon.
+your destination site from a list of sites created on Pantheon. Select the site you are working on from the dropdown. 
 
 The next step is to start lando. After which you can go to one of the listed URLs upon
 success
@@ -283,26 +289,26 @@ lando push -c none -d dev -f dev
 Open the dev site when the push is complete, and do a spot check
 
 ```
-terminus env:view <destinationsitename.env>
+terminus env:view <destination_site_name.env>
 ```
 
 **Always make a backup if overwriting live**
 
 ```
-terminus backup:create <destinationsitename.live>
+terminus backup:create <destination_site_name.live>
 ```
 
 If all looks good, go ahead and deploy your migration to another environment,
 overwriting that environment’s database and files.
 
 ```
-terminus env:clone-content <destinationsitename.dev> <target_env> --cc -y
+terminus env:clone-content <destination_site_name.dev> <target_env> --cc -y
 ```
 
 Check the destination site.
 
 ```
-terminus env:view <destinationsitename.live>
+terminus env:view <destination_site_name.live>
 ```
 
 ### Clean up
