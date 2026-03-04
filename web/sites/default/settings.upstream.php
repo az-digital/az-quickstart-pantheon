@@ -66,7 +66,7 @@ $config['system.performance']['fast_404']['enabled'] = TRUE;
 /**
  * Exclude dev modules + associated config from config exports/imports.
  */
-$settings['config_exclude_modules'] = ['devel', 'field_ui', 'views_ui'];
+$settings['config_exclude_modules'] = ['devel', 'field_ui', 'views_ui', 'smart_title_ui'];
 
 /**
  * Default configuration for all Pantheon Environment requests.
@@ -125,6 +125,11 @@ if (defined('PANTHEON_ENVIRONMENT')) {
 
     // Aggregate CSS files - off.
     $config['system.performance']['js']['preprocess'] = 0;
+  }
+
+  // Set a memory limit for ImageMagick on sites with < 512 MB of memory.
+  if (!\Drupal\Component\Utility\Environment::checkMemoryLimit('512M')) {
+    $config['imagemagick.settings']['prepend'] = '-limit memory 64MiB';
   }
 
   /**
