@@ -235,12 +235,6 @@ Ensure that the dev environment has an up to date version of the site and then p
 lando pull -d live -f live -c none
 ```
 
-Then install composer dependencies
-
-```
-lando composer update
-```
-
 Now we can use the Lando tooling to set up our site to migrate locally instead
 of over http, which is much faster.
 
