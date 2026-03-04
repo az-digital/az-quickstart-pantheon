@@ -189,7 +189,7 @@ terminus env:view <destinationsitename.live>
 
 Once you've determined that a site is truly eligible to be migrated, follow these steps.
 
-## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from Pantheon
+## Migrating a Pantheon Drupal 7 or UA Quickstart site to Modern Arizona Quickstart
 
 NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site.
 NOTE: Instructions for how to use Lando for local development when contributing general fixes and enhancements to Quickstart (not Pantheon site specific) can be found in the [contributing guide in the main AZ Quickstart repository](https://github.com/az-digital/az_quickstart/blob/main/CONTRIBUTING.md#local-development).
