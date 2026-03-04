@@ -198,7 +198,7 @@ Create your local copy of the Pantheon **destination** site by initializing Land
 ```
 mkdir <destination-site-name>
 cd <destination_site_name>
-lando init --source pantheon
+lando init --source pantheon --name <destination-site-name>
 ```
 Or execute the bash commands:
 
