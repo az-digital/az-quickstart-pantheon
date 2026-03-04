@@ -232,7 +232,7 @@ Feel free to enable those environments for your destination site now.
 Ensure that the dev environment has an up to date version of the site and then pull from dev.
 
 ```
-lando pull -d dev -f dev -c none
+lando pull -d live -f live -c none
 ```
 
 Then install composer dependencies
@@ -248,7 +248,7 @@ NOTE: This step overrides the migrate database config that exists in
 https://github.com/az-digital/az-quickstart-pantheon/blob/master/web/sites/default/settings.upstream.php#L20-L35
 
 ```
-lando migrate-setup-from-pantheon -s <sourcesitename.env>
+lando migrate-setup-from-pantheon -s <source-site-name>.<environment>
 ```
 
 **NOTE:** The `migrate-setup-from-pantheon` command executes a [script](https://github.com/az-digital/az-quickstart-pantheon/blob/master/scripts/lando/migrate-setup-from-pantheon.sh) included with this repository.
@@ -289,26 +289,26 @@ lando push -c none -d dev -f dev
 Open the dev site when the push is complete, and do a spot check
 
 ```
-terminus env:view <destination_site_name.env>
+terminus env:view <destination-site-name>.<environment>
 ```
 
 **Always make a backup if overwriting live**
 
 ```
-terminus backup:create <destination_site_name.live>
+terminus backup:create <destination-site-name>.live
 ```
 
 If all looks good, go ahead and deploy your migration to another environment,
 overwriting that environment’s database and files.
 
 ```
-terminus env:clone-content <destination_site_name.dev> <target_env> --cc -y
+terminus env:clone-content <destination-site-name>.dev <target_env> --cc -y
 ```
 
 Check the destination site.
 
 ```
-terminus env:view <destination_site_name.live>
+terminus env:view <destination-site-name>.live
 ```
 
 ### Clean up
