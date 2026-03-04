@@ -203,7 +203,7 @@ lando init --source pantheon --name <destination-site-name>
 Or execute the bash commands:
 
 ```
-mkdir <destination_site_name> && cd "$_"
+mkdir <destination-site-name> && cd "$_"
 lando init --source pantheon
 ```
 
