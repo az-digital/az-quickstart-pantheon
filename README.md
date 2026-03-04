@@ -197,7 +197,7 @@ NOTE: Instructions for how to use Lando for local development when contributing 
 Create your local copy of the Pantheon **destination** site by initializing Lando inside an *empty* folder:
 ```
 mkdir <destination-site-name>
-cd <destination_site_name>
+cd <destination-site-name>
 lando init --source pantheon --name <destination-site-name>
 ```
 Or execute the bash commands:
