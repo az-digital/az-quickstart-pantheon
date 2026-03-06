@@ -189,20 +189,26 @@ terminus env:view <destinationsitename.live>
 
 Once you've determined that a site is truly eligible to be migrated, follow these steps.
 
-## Running migrations from Drupal 7 or UA Quickstart site downloaded from Pantheon, to Drupal 9 Arizona Quickstart site downloaded from Pantheon
+## Migrating a Pantheon Drupal 7 or UA Quickstart site to Modern Arizona Quickstart
 
 NOTE: The `lando migrate-setup-from-pantheon` command requires that a site exists on Pantheon, since it uses terminus to find site variables on the source site.
+NOTE: Instructions for how to use Lando for local development when contributing general fixes and enhancements to Quickstart (not Pantheon site specific) can be found in the [contributing guide in the main AZ Quickstart repository](https://github.com/az-digital/az_quickstart/blob/main/CONTRIBUTING.md#local-development).
 
-From the parent directory where you want to create your local copy of the **destination**
-site on Pantheon.
+Create your local copy of the Pantheon **destination** site by initializing Lando inside an *empty* folder:
+```
+mkdir <destination-site-name>
+cd <destination-site-name>
+lando init --source pantheon --name <destination-site-name>
+```
+Or execute the bash commands:
 
 ```
-mkdir <destinationsitename> && cd "$_"
+mkdir <destination-site-name> && cd "$_"
 lando init --source pantheon
 ```
 
 This starts the interactive site creation tool that allows you to choose
-your destination site from a list of sites created on Pantheon.
+your destination site from a list of sites created on Pantheon. Select the site you are working on from the dropdown. 
 
 The next step is to start lando. After which you can go to one of the listed URLs upon
 success
@@ -226,13 +232,7 @@ Feel free to enable those environments for your destination site now.
 Ensure that the dev environment has an up to date version of the site and then pull from dev.
 
 ```
-lando pull -d dev -f dev -c none
-```
-
-Then install composer dependencies
-
-```
-lando composer update
+lando pull -d live -f live -c none
 ```
 
 Now we can use the Lando tooling to set up our site to migrate locally instead
@@ -242,7 +242,7 @@ NOTE: This step overrides the migrate database config that exists in
 https://github.com/az-digital/az-quickstart-pantheon/blob/master/web/sites/default/settings.upstream.php#L20-L35
 
 ```
-lando migrate-setup-from-pantheon -s <sourcesitename.env>
+lando migrate-setup-from-pantheon -s <source-site-name>.<environment>
 ```
 
 **NOTE:** The `migrate-setup-from-pantheon` command executes a [script](https://github.com/az-digital/az-quickstart-pantheon/blob/master/scripts/lando/migrate-setup-from-pantheon.sh) included with this repository.
@@ -283,26 +283,26 @@ lando push -c none -d dev -f dev
 Open the dev site when the push is complete, and do a spot check
 
 ```
-terminus env:view <destinationsitename.env>
+terminus env:view <destination-site-name>.<environment>
 ```
 
 **Always make a backup if overwriting live**
 
 ```
-terminus backup:create <destinationsitename.live>
+terminus backup:create <destination-site-name>.live
 ```
 
 If all looks good, go ahead and deploy your migration to another environment,
 overwriting that environment’s database and files.
 
 ```
-terminus env:clone-content <destinationsitename.dev> <target_env> --cc -y
+terminus env:clone-content <destination-site-name>.dev <target_env> --cc -y
 ```
 
 Check the destination site.
 
 ```
-terminus env:view <destinationsitename.live>
+terminus env:view <destination-site-name>.live
 ```
 
 ### Clean up
