@@ -9,9 +9,18 @@ jobs:
   notify-cws:
     runs-on: ubuntu-latest
     steps:
+      - name: Generate repository dispatch token
+        id: generate-token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        with:
+          client-id: ${{ vars.CWS_REPO_DISPATCH_CLIENT_ID }}
+          private-key: ${{ secrets.CWS_REPO_DISPATCH_PRIVATE_KEY }}
+          repositories: |
+            devops-tools
+
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v3
         with:
-          token: ${{ secrets.CWS_REPO_DISPATCH_TOKEN }}
+          token: ${{ steps.generate-token.outputs.token }}
           repository: uaz-web/devops-tools
           event-type: az_quickstart_release_available_on_pantheon
