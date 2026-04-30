@@ -1,6 +1,7 @@
 name: Notify Campus Web Services
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 3.x
