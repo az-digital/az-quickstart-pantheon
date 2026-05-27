@@ -18,7 +18,9 @@
         }
     ],
     "require": {
-        "internal/upstream-configuration": "*"
+        "internal/upstream-configuration": "*",
+        "symfony/polyfill-intl-idn":"1.38.1 as 1.37.0",
+        "twig/twig": "3.27.0 as 3.26.0"
     },
     "conflict": {
         "drupal/drupal": "*"
