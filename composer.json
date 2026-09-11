@@ -40,9 +40,7 @@
         "enable-patching": true,
         "installer-paths": {
             "web/core": ["type:drupal-core"],
-            "web/libraries/{$name}": [
-                "type:drupal-library"
-            ],
+            "web/libraries/{$name}": ["type:drupal-library"],
             "web/modules/contrib/{$name}": ["type:drupal-module"],
             "web/profiles/contrib/{$name}": ["type:drupal-profile"],
             "web/themes/contrib/{$name}": ["type:drupal-theme"],
@@ -52,10 +50,6 @@
             "drush/Commands/contrib/{$name}": ["type:drupal-drush"],
             "web/private/scripts/quicksilver/{$name}/": ["type:quicksilver-script"]
         },
-        "installer-types": [
-            "bower-asset",
-            "npm-asset"
-        ],
         "patchLevel": {
             "drupal/core": "-p2"
         },
