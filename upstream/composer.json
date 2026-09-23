@@ -6,15 +6,11 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "composer",
-            "url": "https://asset-packagist.org"
         }
     ],
     "require": {
         "php": ">=8.3",
-        "az-digital/az_quickstart": "3.5.5",
+        "az-digital/az_quickstart": "3.6.0-alpha3",
         "composer/installers": "^2.3",
         "cweagans/composer-patches": "^1.7",
         "drupal/config_import_single": "2.0.2",
@@ -24,7 +20,6 @@
         "drupal/pantheon_secrets": "1.1.0",
         "drupal/redis": "1.11.0",
         "drush/drush": "^13.6.0",
-        "oomphinc/composer-installers-extender": "^2.0.0",
         "pantheon-systems/drupal-integrations": "^11",
         "pantheon-systems/pantheon_domain_masking": "2.1.1"
     },
