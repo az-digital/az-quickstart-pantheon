@@ -26,7 +26,8 @@
         "drush/drush": "^13.6.0",
         "oomphinc/composer-installers-extender": "^2.0.0",
         "pantheon-systems/drupal-integrations": "^11",
-        "pantheon-systems/pantheon_domain_masking": "2.1.1"
+        "pantheon-systems/pantheon_domain_masking": "2.1.1",
+        "twig/twig": "3.28.0"
     },
     "extra": {
         "enable-patching": true
