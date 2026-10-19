@@ -99,6 +99,31 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   }
 
   /**
+   * Build indentification string for user agent.
+   */
+  $user_agent_identifiers = [];
+  // Host if available (this is preferred).
+  if (!empty($_SERVER['HTTP_HOST'])) {
+    $user_agent_identifiers[] = $_SERVER['HTTP_HOST'];
+  }
+  // Pantheon site and environment identifier.
+  if (!empty($_ENV['PANTHEON_SITE_NAME'])) {
+    $user_agent_identifiers[] = $_ENV['PANTHEON_SITE_NAME'] . '.' . $_ENV['PANTHEON_ENVIRONMENT'];
+  }
+  // IP address identifier - not desirable, last resort.
+  if (!empty($_SERVER['SERVER_ADDR'])) {
+    $user_agent_identifiers[] = $_SERVER['SERVER_ADDR'];
+  }
+  // Stock reference to Drupal core.
+  $user_agent_identifiers[] = 'https://www.drupal.org/';
+  // Get the most preferred identifier.
+  $user_agent_identifier = array_shift($user_agent_identifiers);
+  // Compose User-Agent string, include Drupal version.
+  $default_user_agent_string = 'AZ Quickstart Drupal/' . \Drupal::VERSION . ' (+' . $user_agent_identifier . ')';
+  // Add as default User-Agent header in http client configuration.
+  $settings['http_client_config']['headers']['User-Agent'] = $default_user_agent_string;
+
+  /**
    * Environment-specific performance and caching configuration overrides.
    *
    * @see https://pantheon.io/docs/drupal-cache/
