@@ -99,7 +99,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
   }
 
   /**
-   * Build indentification string for user agent.
+   * Build identification string for user agent.
    */
   $user_agent_identifiers = [];
   // Host if available (this is preferred).
