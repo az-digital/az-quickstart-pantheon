@@ -107,7 +107,7 @@ if (defined('PANTHEON_ENVIRONMENT')) {
     $user_agent_identifiers[] = $_SERVER['HTTP_HOST'];
   }
   // Pantheon site and environment identifier.
-  if (!empty($_ENV['PANTHEON_SITE_NAME'])) {
+  if (!empty($_ENV['PANTHEON_SITE'])) {
     $user_agent_identifiers[] = $_ENV['PANTHEON_ENVIRONMENT'] . '-' . $_ENV['PANTHEON_SITE'] . '.' . 'pantheonsite.io';
   }
   // IP address identifier - not desirable, last resort.
