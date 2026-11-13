@@ -17,7 +17,7 @@
         "drupal/core-composer-scaffold": "~11.4.0",
         "drupal/core-recommended": "~11.4.0",
         "drupal/pantheon_advanced_page_cache": "2.4.1",
-        "drupal/pantheon_secrets": "1.1.0",
+        "drupal/pantheon_secrets": "1.1.1",
         "drupal/redis": "1.11.0",
         "drush/drush": "^13.6.0",
         "pantheon-systems/drupal-integrations": "^11",
