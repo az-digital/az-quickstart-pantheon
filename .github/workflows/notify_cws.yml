@@ -1,5 +1,8 @@
 name: Notify Campus Web Services
 
+permissions:
+  contents: read
+
 on:
   workflow_dispatch:
   push:
