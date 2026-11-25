@@ -3,6 +3,9 @@ on:
   repository_dispatch:
     types: az_quickstart_release
 
+permissions:
+  contents: read
+
 jobs:
   release:
     name: Create PR
